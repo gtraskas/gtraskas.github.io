@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Data Scientist</title>
+    <link>http://gtraskas.github.io/tags/</link>
+    <description>Recent content in Tags on Data Scientist</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="http://gtraskas.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Data Cleaning</title>
+      <link>http://gtraskas.github.io/tags/data-cleaning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/data-cleaning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Verification</title>
+      <link>http://gtraskas.github.io/tags/data-verification/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/data-verification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exploratory Data Analysis Techniques</title>
+      <link>http://gtraskas.github.io/tags/exploratory-data-analysis-techniques/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/exploratory-data-analysis-techniques/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Feature Selection</title>
+      <link>http://gtraskas.github.io/tags/feature-selection/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/feature-selection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hypothesis Testing</title>
+      <link>http://gtraskas.github.io/tags/hypothesis-testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/hypothesis-testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ipython Notebook</title>
+      <link>http://gtraskas.github.io/tags/ipython-notebook/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/ipython-notebook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>http://gtraskas.github.io/tags/machine-learning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Matplotlib</title>
+      <link>http://gtraskas.github.io/tags/matplotlib/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/matplotlib/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Measures of Central Tendency</title>
+      <link>http://gtraskas.github.io/tags/measures-of-central-tendency/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/measures-of-central-tendency/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Natural Language Processing</title>
+      <link>http://gtraskas.github.io/tags/natural-language-processing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/natural-language-processing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Numpy</title>
+      <link>http://gtraskas.github.io/tags/numpy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/numpy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>P Values</title>
+      <link>http://gtraskas.github.io/tags/p-values/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/p-values/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pandas</title>
+      <link>http://gtraskas.github.io/tags/pandas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/pandas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Plotting in R</title>
+      <link>http://gtraskas.github.io/tags/plotting-in-r/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/plotting-in-r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>http://gtraskas.github.io/tags/python/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R Packages</title>
+      <link>http://gtraskas.github.io/tags/r-packages/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/r-packages/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rstudio</title>
+      <link>http://gtraskas.github.io/tags/rstudio/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/rstudio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Scikit Learn</title>
+      <link>http://gtraskas.github.io/tags/scikit-learn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/scikit-learn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Statistics</title>
+      <link>http://gtraskas.github.io/tags/statistics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/statistics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tableau</title>
+      <link>http://gtraskas.github.io/tags/tableau/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/tableau/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Variability</title>
+      <link>http://gtraskas.github.io/tags/variability/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/variability/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visualising Data</title>
+      <link>http://gtraskas.github.io/tags/visualising-data/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/tags/visualising-data/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
