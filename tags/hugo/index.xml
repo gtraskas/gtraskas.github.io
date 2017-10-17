@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on A data science blog</title>
+    <link>http://gtraskas.github.io/tags/hugo/</link>
+    <description>Recent content in Hugo on A data science blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 17 Oct 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gtraskas.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to create your blog/site with Hugo and GitHub</title>
+      <link>http://gtraskas.github.io/post/hugo_github_tutorial/</link>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/post/hugo_github_tutorial/</guid>
+      <description>A step-by-step guide for macOS
+Create two new repositories in GitHub First sign in your profile page or make a new profile, if you haven&amp;rsquo;t already one. Then:
+ Go to Repositories page and click to the New icon to create a new repository with the name of your project (e.g. MySite) and initialize with README. This repository will contain Hugo’s content and other source files.
+ Similarly, create a second repository with name USERNAME.</description>
+    </item>
+    
+  </channel>
+</rss>

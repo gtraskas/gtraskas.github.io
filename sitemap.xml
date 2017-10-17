@@ -31,13 +31,30 @@
   </url>
   
   <url>
+    <loc>http://gtraskas.github.io/post/hugo_github_tutorial/</loc>
+    <lastmod>2017-10-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://gtraskas.github.io/about/me/</loc>
     <lastmod>2017-10-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>http://gtraskas.github.io/</loc>
+    <lastmod>2017-10-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://gtraskas.github.io/about/</loc>
     <lastmod>2017-10-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://gtraskas.github.io/tags/blog/</loc>
+    <lastmod>2017-10-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -48,12 +65,6 @@
   
   <url>
     <loc>http://gtraskas.github.io/tags/data-cleaning/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gtraskas.github.io/</loc>
-    <lastmod>2017-10-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -69,6 +80,18 @@
   
   <url>
     <loc>http://gtraskas.github.io/tags/feature-selection/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://gtraskas.github.io/tags/github/</loc>
+    <lastmod>2017-10-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://gtraskas.github.io/tags/hugo/</loc>
+    <lastmod>2017-10-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -123,6 +146,12 @@
   </url>
   
   <url>
+    <loc>http://gtraskas.github.io/post/</loc>
+    <lastmod>2017-10-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://gtraskas.github.io/project/</loc>
     <priority>0</priority>
   </url>
@@ -159,6 +188,7 @@
   
   <url>
     <loc>http://gtraskas.github.io/tags/</loc>
+    <lastmod>2017-10-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

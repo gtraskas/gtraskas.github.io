@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>How to create your blog/site with Hugo and GitHub</title>
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: #336699;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/R.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.29" />
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', '');
+        </script>
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">How to create your blog/site with Hugo and GitHub</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/about/me">About</a></li>
+                            
+                                <li><a href="/project/">Projects</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:georgiost77@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/gtraskas/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="http://gr.linkedin.com/in/georgiostraskas"><i class="fa fa-linkedin"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/hugo_github_tutorial/">How to create your blog/site with Hugo and GitHub</a></h4>
+    <h5>October 17, 2017</h5>
+     <kbd class="item-tag">github</kbd>  <kbd class="item-tag">hugo</kbd>  <kbd class="item-tag">blog</kbd> 
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>A step-by-step guide for macOS</p>
+
+<h3 id="create-two-new-repositories-in-github-https-github-com">Create two new repositories in <a href="https://github.com">GitHub</a></h3>
+
+<p>First sign in your profile page or make a new profile, if you haven&rsquo;t already one. Then:</p>
+
+<ol>
+<li><p>Go to <code>Repositories</code> page and click to the <code>New</code> icon to create a new repository with the name of your project (e.g. <code>MySite</code>) and initialize with <code>README</code>. This repository will contain Hugo’s content and other source files.</p></li>
+
+<li><p>Similarly, create a second repository with name <code>USERNAME.github.io</code>, which will contain the fully rendered version of your Hugo website. Open <code>terminal</code> in your working directory and clone this repository into your local directory.</p>
+
+<pre><code>$ git clone https://github.com/USERNAME/USERNAME.github.io.git
+</code></pre>
+
+<p>A new directory with the same name was created.</p></li>
+</ol>
+
+<h3 id="install-hugo">Install Hugo</h3>
+
+<p>Install the latest Hugo version in your machine following this <a href="https://gohugo.io/getting-started/installing">guide</a>.</p>
+
+<h3 id="create-your-site">Create your site</h3>
+
+<p>From <code>terminal</code> make sure you are still in your working directory and create a new directory for your website content and source files. Name this folder same as your project repository, i.e. <code>MySite</code>. Then go inside your new directory and create your new site with Hugo.</p>
+
+<pre><code>$ mkdir MySite
+$ cd MySite/
+$ hugo new site .
+</code></pre>
+
+<p>Initialize an empty Git repository, add your project repository, and fetch from your GitHub Project repository.</p>
+
+<pre><code>$ git init
+$ git remote add origin https://github.com/USERNAME/MySite.git
+$ git pull origin master
+</code></pre>
+
+<p>Add <code>public/</code> to <code>.gitignore</code> instead of completely remove this folder. A gitignore file specifies intentionally untracked files that Git should ignore.</p>
+
+<pre><code>$ nano .gitignore
+</code></pre>
+
+<p>Write <code>public/</code> to the opened file, save and exit. Then add file contents to the index, record changes to the repository, and update remote refs along with associated objects.</p>
+
+<pre><code>$ git add .
+$ git commit -m &quot;Initial commit&quot;
+$ git push -u origin master
+</code></pre>
+
+<h3 id="install-a-hugo-theme">Install a Hugo theme</h3>
+
+<p>First, make sure you work in your project folder <code>MySite</code>. Got to the <a href="https://themes.gohugo.io">Hugo Themes</a> website, select a theme and install it following the guide. For example, for the <a href="https://themes.gohugo.io/minimal/">Minimal</a> theme you do the following:</p>
+
+<pre><code>$ git submodule add https://github.com/calintat/minimal.git themes/minimal
+$ git submodule init
+$ git submodule update
+$ git submodule update --remote themes/minimal
+</code></pre>
+
+<p>After installation, take a look at the <code>exampleSite</code> folder inside <code>themes/minimal</code>. To get started, copy the <code>config.toml</code> file inside <code>exampleSite</code> to the root of your Hugo site (your project directory, i.e. <code>MySite</code>)</p>
+
+<pre><code>$ cp themes/minimal/exampleSite/config.toml .
+</code></pre>
+
+<p>You can now edit this file and add your own information.</p>
+
+<h3 id="test-your-website-locally">Test your website locally</h3>
+
+<p>Make your website work locally</p>
+
+<pre><code>$ hugo server
+</code></pre>
+
+<p>and open your browser to <a href="http://localhost:1313">http://localhost:1313</a>. Press Ctrl+C to kill the server.</p>
+
+<h3 id="create-content">Create content</h3>
+
+<p>Create content for your website with your favourite editor, e.g. Visual Studio Code, editing the <code>config.toml</code> and the files in the <code>content</code> directory inside your project folder <code>MySite</code>. Test your site locally everytime you want to check your changes. Don&rsquo;t forget to kill the server when you finish.</p>
+
+<h3 id="deploy-your-site">Deploy your site</h3>
+
+<p>Once you are happy with the results, you are ready to deploy your site. Make sure that you are in your project directory, <code>MySite</code> and run the following:</p>
+
+<pre><code>$ hugo -d ../USERNAME.github.io/
+</code></pre>
+
+<p>This command creates all the required files for your website. Now, it&rsquo;s time to go to your second directory which contains the fully rendered version of your Hugo website, add the newly created files to the index, commit the changes and send everything to your remote repository.</p>
+
+<pre><code>$ cd ../USERNAME.github.io/
+$ git status
+$ git add --all
+$ git commit -m &quot;Initial commit&quot;
+$ git push origin master
+</code></pre>
+
+<p>Done! In a few seconds you will be able to see your website.</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

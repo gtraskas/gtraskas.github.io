@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Matplotlib on Data Scientist</title>
+    <title>Matplotlib on A data science blog</title>
     <link>http://gtraskas.github.io/tags/matplotlib/</link>
-    <description>Recent content in Matplotlib on Data Scientist</description>
+    <description>Recent content in Matplotlib on A data science blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
