@@ -196,7 +196,7 @@ g = g.map_offdiag(plt.scatter, edgecolor=&quot;w&quot;, s=40)
 plt.show()
 </code></pre>
 
-<p><img src="/static/breast_cancer/output_10_0.png" alt="png" title="Correlation matrix" /></p>
+<p><img src="/breast_cancer/output_10_0.png" alt="png" title="Correlation matrix" /></p>
 
 <p>It seems that:</p>
 
@@ -221,7 +221,7 @@ sns.heatmap(df_corr, cmap=&quot;Blues&quot;, annot=True)
 plt.show()
 </code></pre>
 
-<p><img src="/static/breast_cancer/output_12_0.png" alt="png" title="Heatmap" /></p>
+<p><img src="/breast_cancer/output_12_0.png" alt="png" title="Heatmap" /></p>
 
 <ul>
 <li><p>As it was expected there are very strong correlations between radius, perimeter and area.</p></li>
@@ -461,9 +461,9 @@ def plot_pca():
 plot_pca()
 </code></pre>
 
-<p><img src="/static/breast_cancer/output_27_0.png" alt="png" title="Unscaled Data - Feature Contribution" /></p>
+<p><img src="/breast_cancer/output_27_0.png" alt="png" title="Unscaled Data - Feature Contribution" /></p>
 
-<p><img src="/static/breast_cancer/output_27_1.png" alt="png" title="Unscaled Data - Cumulative Explained Variance" /></p>
+<p><img src="/breast_cancer/output_27_1.png" alt="png" title="Unscaled Data - Cumulative Explained Variance" /></p>
 
 <p>Applying PCA on the unscaled dataset, it seems that more than 99% of the variance is explained by only one component, which is too good to be true. The feature contribution plot depicts that principal components 3 (<code>area_mean</code>) and 23 (<code>area_worst</code>) dominate the PCA. This is explained by the large variance of <code>area_mean</code> and <code>area_worst</code> (see std values of the Data Exploration section). To avoid this, feature scaling prior to PCA is highly recommended.</p>
 
@@ -473,9 +473,9 @@ pca_inversed_data = pca.inverse_transform(np.eye(30))
 plot_pca()
 </code></pre>
 
-<p><img src="/static/breast_cancer/output_29_0.png" alt="png" title="Scaled Data - Feature Contribution" /></p>
+<p><img src="/breast_cancer/output_29_0.png" alt="png" title="Scaled Data - Feature Contribution" /></p>
 
-<p><img src="/static/breast_cancer/output_29_1.png" alt="png" title="Scaled Data - Cumulative Explained Variance" /></p>
+<p><img src="/breast_cancer/output_29_1.png" alt="png" title="Scaled Data - Cumulative Explained Variance" /></p>
 
 <p>After applying scaling before PCA, 5 principal components are required to explain more than 90% of the variance. This shows a better handle on the variation within the dataset.</p>
 
