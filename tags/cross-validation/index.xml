@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cross Validation on A data science blog</title>
+    <link>http://gtraskas.github.io/tags/cross-validation/</link>
+    <description>Recent content in Cross Validation on A data science blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Oct 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gtraskas.github.io/tags/cross-validation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Breast Cancer Analysis and Prediction</title>
+      <link>http://gtraskas.github.io/project/project7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/project/project7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Breast Cancer Machine Learning Prediction</title>
+      <link>http://gtraskas.github.io/post/breast_cancer/</link>
+      <pubDate>Sun, 29 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/post/breast_cancer/</guid>
+      <description>In this study, advanced machine learning methods will be utilized to build and test the performance of a selected algorithm for breast cancer diagnosis.
+Dataset Description The Breast Cancer Wisconsin (Diagnostic) DataSet, obtained from Kaggle, contains features computed from a digitized image of a fine needle aspirate (FNA) of a breast mass and describe characteristics of the cell nuclei present in the image.
+ Number of instances: 569
+ Number of attributes: 32 (ID, diagnosis, 30 real-valued input features)</description>
+    </item>
+    
+  </channel>
+</rss>
