@@ -136,7 +136,7 @@
 
     <h4><a href="/post/breast_cancer/">Breast Cancer Machine Learning Prediction</a></h4>
     <h5>October 29, 2017</h5>
-     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">scikit-learn</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">feature selection</kbd>  <kbd class="item-tag">PCA</kbd>  <kbd class="item-tag">cross-validation</kbd>  <kbd class="item-tag">evaluation-metrics</kbd>  <kbd class="item-tag">Pandas</kbd>  <kbd class="item-tag">IPython notebook</kbd> 
+     <kbd class="item-tag">scikit-learn</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">feature selection</kbd>  <kbd class="item-tag">PCA</kbd>  <kbd class="item-tag">cross-validation</kbd> 
 
 </div>
 
@@ -253,8 +253,10 @@ features = array[:,1:]
 labels = array[:,0]
 
 # Create a train/test split using 30% test size.
-features_train, features_test, labels_train, labels_test = train_test_split(features, \
-labels, test_size=0.3, random_state=42)
+features_train, features_test, labels_train, labels_test = train_test_split(features,
+                                                                            labels,
+                                                                            test_size=0.3,
+                                                                            random_state=42)
 
 # Check the split printing the shape of each set.
 print(features_train.shape, labels_train.shape)
@@ -302,7 +304,7 @@ def print_ml_results():
     report = classification_report(labels_test, predictions)
 
     # Print the reports.
-    print(&quot;\nReport for the normal dataset without Cross Validation and PCA:\n&quot;)
+    print(&quot;\nReport:\n&quot;)
     print(&quot;Accuracy: {}&quot;.format(accuracy))
     print(&quot;\n&quot;, report)
     print(confusion_matrix(labels_test, predictions))
@@ -352,8 +354,10 @@ features_new = array[:,1:]
 labels_new = array[:,0]
 
 # Create a train/test split using 30% test size.
-features_train, features_test, labels_train, labels_test = train_test_split(features_new,\
-labels_new, test_size=0.3, random_state=42)
+features_train, features_test, labels_train, labels_test = train_test_split(features,
+                                                                            labels,
+                                                                            test_size=0.3,
+                                                                            random_state=42)
 
 print_ml_results()
 </code></pre>
@@ -538,8 +542,10 @@ scaler = MinMaxScaler(feature_range=(0,1))
 features = scaler.fit_transform(features)
 
 # Create a train/test split using 30% test size.
-features_train, features_test, labels_train, labels_test = train_test_split(features, \
-labels, test_size=0.3, random_state=42)
+features_train, features_test, labels_train, labels_test = train_test_split(features,
+                                                                            labels,
+                                                                            test_size=0.3,
+                                                                            random_state=42)
 
 # Create the classifier.
 clf = KNeighborsClassifier()
@@ -592,7 +598,7 @@ def get_best_estimator(n_splits):
     best_score = grid.best_score_
 
     # Print the reports.
-    print(&quot;\nReport for the scaled dataset with Cross Validation and Dimensionality Reduction:\n&quot;)
+    print(&quot;\nReport:\n&quot;)
     print(report)
     print(&quot;Best f1-score:&quot;)
     print(best_score)
@@ -623,10 +629,6 @@ Best parameters:
 [[106   2]
  [  3  60]]
 Time passed:  11.67 s
-
-
-
-
 
 Pipeline(memory=None,
      steps=[('reduce_dim', PCA(copy=True, iterated_power=7, n_components=5, random_state=None,
@@ -682,10 +684,6 @@ Best parameters:
 [[107   1]
  [  4  59]]
 Time passed:  35.545 s
-
-
-
-
 
 Pipeline(memory=None,
      steps=[('features', FeatureUnion(n_jobs=1,
