@@ -6,7 +6,7 @@
     <description>Recent content in Scikit Learn on A data science blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Nov 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://gtraskas.github.io/tags/scikit-learn/index.xml" rel="self" type="application/rss+xml" />
     
@@ -27,6 +27,16 @@
       
       <guid>http://gtraskas.github.io/project/project1/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Influence of Feature Selection and PCA on a Small Dataset</title>
+      <link>http://gtraskas.github.io/post/titanic_prediction/</link>
+      <pubDate>Thu, 23 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/post/titanic_prediction/</guid>
+      <description>This study covers the influence of feature selection and PCA on the Titanic Survivors dataset. Most of the preprocessing code such as data cleaning, encoding and transformation is adapted from the Scikit-Learn ML from Start to Finish work by Jeff Delaney.
+Import Data Load the csv train and test files into a pandas dataframe and print the first 5 rows to see a sample of the data. Print also a statistics description of each feature.</description>
     </item>
     
     <item>

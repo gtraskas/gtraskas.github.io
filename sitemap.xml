@@ -31,6 +31,11 @@
   </url>
   
   <url>
+    <loc>http://gtraskas.github.io/post/titanic_prediction/</loc>
+    <lastmod>2017-11-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://gtraskas.github.io/post/breast_cancer/</loc>
     <lastmod>2017-10-29T00:00:00+00:00</lastmod>
   </url>
@@ -47,7 +52,7 @@
   
   <url>
     <loc>http://gtraskas.github.io/</loc>
-    <lastmod>2017-10-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -70,7 +75,7 @@
   
   <url>
     <loc>http://gtraskas.github.io/tags/cross-validation/</loc>
-    <lastmod>2017-10-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -96,7 +101,7 @@
   
   <url>
     <loc>http://gtraskas.github.io/tags/feature-selection/</loc>
-    <lastmod>2017-10-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -124,7 +129,7 @@
   
   <url>
     <loc>http://gtraskas.github.io/tags/machine-learning/</loc>
-    <lastmod>2017-10-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -160,7 +165,7 @@
   
   <url>
     <loc>http://gtraskas.github.io/tags/pca/</loc>
-    <lastmod>2017-10-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -171,7 +176,7 @@
   
   <url>
     <loc>http://gtraskas.github.io/post/</loc>
-    <lastmod>2017-10-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -197,7 +202,7 @@
   
   <url>
     <loc>http://gtraskas.github.io/tags/scikit-learn/</loc>
-    <lastmod>2017-10-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
