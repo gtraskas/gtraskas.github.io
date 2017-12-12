@@ -6,10 +6,21 @@
     <description>Recent content in Posts on A data science blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Nov 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 12 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://gtraskas.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Spam or Ham?</title>
+      <link>http://gtraskas.github.io/post/spamit/</link>
+      <pubDate>Tue, 12 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://gtraskas.github.io/post/spamit/</guid>
+      <description>Implement a spam filter in Python using the Naive Bayes algorithm to classify the emails as spam or not-spam (a.k.a. ham).
+Check Modules Check system for the required dependencies.
+import sys dependencies = [&amp;quot;nltk&amp;quot;, &amp;quot;numpy&amp;quot;, &amp;quot;pandas&amp;quot;, &amp;quot;scipy&amp;quot;, &amp;quot;sklearn&amp;quot;, &amp;quot;pickle&amp;quot;, &amp;quot;re&amp;quot;] for module in dependencies: print(&amp;quot;\nChecking for &amp;quot; + module + &amp;quot;...&amp;quot;) try: # Import module from string variable: # https://stackoverflow.com/questions/8718885/import-module-from-string-variable # To import using a variable, call __import__(name) module_obj = __import__(module) # To contain the module, create a global object using globals() globals()[module] = module_obj except ImportError: print(&amp;quot;Install &amp;quot; + module + &amp;quot; before continuing&amp;quot;) print(&amp;quot;In a terminal type the following commands:&amp;quot;) print(&amp;quot;python get-pip.</description>
+    </item>
     
     <item>
       <title>Influence of Feature Selection and PCA on a Small Dataset</title>
