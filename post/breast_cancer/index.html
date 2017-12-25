@@ -791,10 +791,15 @@ print(features_test.shape, labels_test.shape)
 
 <h4 id="evaluation-of-the-algorithm">Evaluation of the algorithm</h4>
 
-<p>Accuracy, i.e. the fraction of correct predictions is typically not enough information to evaluate a model. Although it is a starting point, it can lead to invalid decisions. Models with high accuracy may have inadequate precision or recall scores. For this reason the evaluation metrics that were also assessed are:
-* Precision or the ability of the classifier not to label as positive a sample that is negative. The best value is 1 and the worst value is 0. In our study case, precision is when the algorithm guesses that a cell is malignant and actually measures how certain we are that this cell is a true malignant. For example, a precision of 0.9 means that if the model predicts 100 malignant cells, the 90 of them are malignant and the rest 10 are benign (false).
-* Recall or the ability of the classifier to find all the positive samples. The best value is 1 and the worst value is 0. In context to the study, recall shows how well our identifier can find the malignant cells. For example, a low recall score of 0.8 indicates that our identifier finds only 80% of all the real malignant cells in the prediction. The rest 20% of real malignant cells will not be found by the diagnosis based on this algorithm, something that is unacceptable.
-* F1 score, a weighted average of the precision and recall, where an F1 score reaches its best value at 1 and worst score at 0. The relative contribution of precision and recall to the F1 score are equal. The formula for the F1 score is: F1 = 2 x (precision x recall) / (precision + recall).</p>
+<p>Accuracy, i.e. the fraction of correct predictions is typically not enough information to evaluate a model. Although it is a starting point, it can lead to invalid decisions. Models with high accuracy may have inadequate precision or recall scores. For this reason the evaluation metrics that were also assessed are:</p>
+
+<ul>
+<li><p>Precision or the ability of the classifier not to label as positive a sample that is negative. The best value is 1 and the worst value is 0. In our study case, precision is when the algorithm guesses that a cell is malignant and actually measures how certain we are that this cell is a true malignant. For example, a precision of 0.9 means that if the model predicts 100 malignant cells, the 90 of them are malignant and the rest 10 are benign (false).</p></li>
+
+<li><p>Recall or the ability of the classifier to find all the positive samples. The best value is 1 and the worst value is 0. In context to the study, recall shows how well our identifier can find the malignant cells. For example, a low recall score of 0.8 indicates that our identifier finds only 80% of all the real malignant cells in the prediction. The rest 20% of real malignant cells will not be found by the diagnosis based on this algorithm, something that is unacceptable.</p></li>
+
+<li><p>F1 score, a weighted average of the precision and recall, where an F1 score reaches its best value at 1 and worst score at 0. The relative contribution of precision and recall to the F1 score are equal. The formula for the F1 score is: F1 = 2 x (precision x recall) / (precision + recall).</p></li>
+</ul>
 
 <p><details>
   <summary>Show/Hide code</summary></p>
@@ -918,9 +923,13 @@ avg / total       0.90      0.90      0.90       171
 
 <h3 id="scale-features">Scale Features</h3>
 
-<p>A common good practice in machine learning is feature scaling, normalization, standardization or binarization of the predictor variables. The main purposes of these methods are two:
-1. Create comparable features in terms of units, e.g. if there are values in different units, then, the scaled data will be the same.
-2. Create comparable features in terms of size, e.g. if two variables have vastly different ranges, the one with the larger range may dominate the predictive model, even though it may be less important to the target variable than the variable with the smaller range.</p>
+<p>A common good practice in machine learning is feature scaling, normalization, standardization or binarization of the predictor variables. The main purposes of these methods are two:</p>
+
+<ol>
+<li><p>Create comparable features in terms of units, e.g. if there are values in different units, then, the scaled data will be the same.</p></li>
+
+<li><p>Create comparable features in terms of size, e.g. if two variables have vastly different ranges, the one with the larger range may dominate the predictive model, even though it may be less important to the target variable than the variable with the smaller range.</p></li>
+</ol>
 
 <p>Feature scaling was applied here, since it is useful for algorithms that weigh inputs like regression and neural networks, as well as algorithms that use distance measures like K-NN.</p>
 
@@ -963,10 +972,15 @@ Scaled data
 
 <p>PCA is a preprocessing step, which decomposes a multivariate dataset in a set of successive orthogonal components that explain a maximum amount of the variance. It is used when we need to tackle datasets with a large number of features with different scales, some of which might be correlated. These correlations and the high dimension of the dataset bring a redudancy in the information. Applying PCA, the original features are transformed to linear combinations of new independent variables, which reduce the complexity of the dataset and thus, the computational cost.</p>
 
-<p>Summarizing, the main purpose of principal component analysis is to:
-* identify hidden pattern in a data set,
-* reduce the dimensionnality of the data by removing the noise and redundancy in the data,
-* identify correlated variables</p>
+<p>Summarizing, the main purpose of principal component analysis is to:</p>
+
+<ul>
+<li><p>identify hidden pattern in a data set,</p></li>
+
+<li><p>reduce the dimensionnality of the data by removing the noise and redundancy in the data,</p></li>
+
+<li><p>identify correlated variables</p></li>
+</ul>
 
 <p><details>
   <summary>Show/Hide code</summary></p>
@@ -1026,9 +1040,13 @@ plot_pca()
 
 <h3 id="univariate-feature-selection">Univariate Feature Selection</h3>
 
-<p>This preprocessing step is used to select the best features based on univariate statistical tests. Most common methods are:
-* <code>SelectKBest()</code>, which removes all but the k highest scoring features, and
-* <code>SelectPercentile()</code>, which removes all but a user-specified highest scoring percentage of features.</p>
+<p>This preprocessing step is used to select the best features based on univariate statistical tests. Most common methods are:</p>
+
+<ul>
+<li><p><code>SelectKBest()</code>, which removes all but the k highest scoring features, and</p></li>
+
+<li><p><code>SelectPercentile()</code>, which removes all but a user-specified highest scoring percentage of features.</p></li>
+</ul>
 
 <p><strong>Note:</strong> First the dataset must be splitted into train and test sets, since performing feature selection on the whole dataset would lead to prediction bias.</p>
 
@@ -1190,9 +1208,13 @@ Pipeline(memory=None,
 
 <h4 id="combine-pca-and-feature-selection-with-featureunion">Combine PCA and Feature Selection with FeatureUnion</h4>
 
-<p>Often it is beneficial to combine several methods to obtain good performance. <code>FeatureUnion()</code> will be used to combine features obtained by PCA and univariate selection, <code>SelectKBest()</code>. Combining features using this transformer has the advantage that it allows cross validation and grid searches over the whole process. Datasets that benefit from this can often:
-* consist of heterogeneous data types (e.g. raster images and text captions),
-* are stored in a Pandas DataFrame and different columns require different processing pipelines.</p>
+<p>Often it is beneficial to combine several methods to obtain good performance. <code>FeatureUnion()</code> will be used to combine features obtained by PCA and univariate selection, <code>SelectKBest()</code>. Combining features using this transformer has the advantage that it allows cross validation and grid searches over the whole process. Datasets that benefit from this can often:</p>
+
+<ul>
+<li><p>consist of heterogeneous data types (e.g. raster images and text captions),</p></li>
+
+<li><p>are stored in a Pandas DataFrame and different columns require different processing pipelines.</p></li>
+</ul>
 
 <p><details>
   <summary>Show/Hide code</summary></p>
@@ -1255,10 +1277,13 @@ Pipeline(memory=None,
 <p>In this study, K-NN algorithm was applied for the diagnosis of the Breast Cancer Wisconsin DataSet. It was found that precision and recall scores can be considerably improved applying the following steps:</p>
 
 <ul>
-<li>Feature Scaling</li>
-<li>Dimensionality Reduction</li>
-<li>Cross Validation</li>
-<li>Hyperparameter Optimization</li>
+<li><p>Feature Scaling</p></li>
+
+<li><p>Dimensionality Reduction</p></li>
+
+<li><p>Cross Validation</p></li>
+
+<li><p>Hyperparameter Optimization</p></li>
 </ul>
 
 <p>For better results more data are required and other algorithms should be used.</p>
@@ -1266,10 +1291,13 @@ Pipeline(memory=None,
 <h3 id="references">References</h3>
 
 <ol>
-<li><a href="http://scikit-learn.org/stable/index.html">http://scikit-learn.org/stable/index.html</a></li>
-<li><a href="https://jakevdp.github.io/PythonDataScienceHandbook/">https://jakevdp.github.io/PythonDataScienceHandbook/</a></li>
-<li><a href="http://jotterbach.github.io/2016/03/24/Principal_Component_Analysis/">http://jotterbach.github.io/2016/03/24/Principal_Component_Analysis/</a></li>
-<li><a href="https://medium.com/towards-data-science/train-test-split-and-cross-validation-in-python-80b61beca4b6">https://medium.com/towards-data-science/train-test-split-and-cross-validation-in-python-80b61beca4b6</a></li>
+<li><p><a href="http://scikit-learn.org/stable/index.html">http://scikit-learn.org/stable/index.html</a></p></li>
+
+<li><p><a href="https://jakevdp.github.io/PythonDataScienceHandbook/">https://jakevdp.github.io/PythonDataScienceHandbook/</a></p></li>
+
+<li><p><a href="http://jotterbach.github.io/2016/03/24/Principal_Component_Analysis/">http://jotterbach.github.io/2016/03/24/Principal_Component_Analysis/</a></p></li>
+
+<li><p><a href="https://medium.com/towards-data-science/train-test-split-and-cross-validation-in-python-80b61beca4b6">https://medium.com/towards-data-science/train-test-split-and-cross-validation-in-python-80b61beca4b6</a></p></li>
 </ol>
 </div>
 
