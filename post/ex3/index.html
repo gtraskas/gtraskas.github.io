@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Multi-class Classification and Neural Networks</title>
+        <style>
+
+    html body {
+        font-family: 'Lato', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: #0099CC;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/R.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Markdown.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.31.1" />
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', '');
+        </script>
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Multi-class Classification and Neural Networks</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/about/me">About</a></li>
+                            
+                                <li><a href="/project/">Projects</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:georgiost77@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/gtraskas/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/george-traskas/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex3/">Multi-class Classification and Neural Networks</a></h4>
+    <h5>January 8, 2018</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<p>This post covers the third exercise from Andrew Ng&rsquo;s Machine Learning Course on Coursera.</p>
+
+<hr />
+
+<h1 id="multi-class-classification-and-neural-networks">Multi-class Classification and Neural Networks</h1>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>In this exercise, a one-vs-all logistic regression and neural networks will be implemented to recognize hand-written digits (from 0 to 9).</p>
+
+<h1 id="multi-class-classification">Multi-class Classification</h1>
+
+<p>Automated handwritten digit recognition is widely used today - from recognizing zip codes (postal codes) on mail envelopes to recognizing amounts written on bank checks. In the first part, the previous implementation of logistic regression will be extended and applied to one-vs-all classification.</p>
+
+<h2 id="dataset">Dataset</h2>
+
+<p>The dataset in <code>ex3data1.mat</code> contains 5000 training examples of handwritten digits. The .mat format means that the data has been saved in a native Octave/MATLAB matrix format, instead of a text (ASCII) format like a csv-file. These matrices can be read by the <code>loadmat</code> module from <code>scipy</code>. After loading, matrices of the correct dimensions and values will appear in the program’s memory. The matrix will already be named, so there is no need to assign names to them.</p>
+
+<p>There are 5000 training examples in <code>ex3data1.mat</code>, where each training example is a 20 pixel by 20 pixel grayscale image of the digit. Each pixel is represented by a floating point number indicating the grayscale intensity at that location. The 20 by 20 grid of pixels is “unrolled” into a 400-dimensional vector. Each of these training examples becomes a single row in our data matrix <code>X</code>. This gives us a 5000 by 400 matrix <code>X</code> where every row is a training example for a handwritten digit image.</p>
+
+<p><code>$X=\begin{bmatrix}
+    -(x^{(1)})^T-\\
+    -(x^{(2)})^T-\\
+    \vdots\\
+    -(x^{(m)})^T-
+\end{bmatrix}$</code></p>
+
+<p>The second part of the training set is a 5000-dimensional vector y that contains labels for the training set. <strong>Note:</strong> To make things more compatible with Octave/MATLAB indexing, where there is no zero index, the digit zero have been mapped to the value ten. Therefore, a “0” digit is labeled as “10”, while the digits “1” to “9” are labeled as “1” to “9” in their natural order.</p>
+
+<pre><code class="language-python">import numpy as np 
+from scipy.io import loadmat
+
+data1 = loadmat('ex3data1.mat')
+data1
+</code></pre>
+
+<pre><code>{'X': array([[ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        ..., 
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.]]),
+ '__globals__': [],
+ '__header__': b'MATLAB 5.0 MAT-file, Platform: GLNXA64, Created on: Sun Oct 16 13:09:09 2011',
+ '__version__': '1.0',
+ 'y': array([[10],
+        [10],
+        [10],
+        ..., 
+        [ 9],
+        [ 9],
+        [ 9]], dtype=uint8)}
+</code></pre>
+
+<pre><code class="language-python">X = data1['X']
+y = data1['y']
+
+print(X.shape, y.shape)
+</code></pre>
+
+<pre><code>(5000, 400) (5000, 1)
+</code></pre>
+
+<h2 id="visualizing-the-data">Visualizing the Data</h2>
+
+<p>Visualize a subset of the training set. The following code randomly selects 100 rows from <code>X</code> and passes those rows to the displayData function. This function maps each row to a 20 pixel by 20 pixel grayscale image and displays the images together.</p>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+%matplotlib inline
+
+def displayData():
+    &quot;&quot;&quot;
+    Select randomly 100 rows from X,
+    plot them as 20x20 pixel grayscale images,
+    and combine them to one figure with all
+    100 digits.
+    &quot;&quot;&quot;
+    # Create 100 subplots and remove the gaps
+    # between the subplots with gridspec.
+    fig, axarr = plt.subplots(10, 10,
+                             figsize=(6, 6),
+                             gridspec_kw={'wspace':0,
+                                          'hspace':0})
+    for i in range(10):
+        for j in range(10):
+            # Select random indices.
+            idx = np.random.choice(len(X), 1)
+            # Index the array X with the indices.
+            pixels = X[idx] # shape(1, 400)
+            pixels = pixels.reshape(-1, 20) # shape(20, 20)
+            axarr[i,j].imshow(pixels.T, cmap='gray_r')
+            # Remove ticks.
+            axarr[i,j].set_xticks([])
+            axarr[i,j].set_yticks([])
+            # Turn off axes.
+            axarr[i,j].axis('off')
+    plt.show()
+
+displayData()
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/Sample_digits.png" alt="png" title="A sample of handwritten digits" /></p>
+
+<h2 id="vectorizing-logistic-regression">Vectorizing Logistic Regression</h2>
+
+<p>Multiple one-vs-all logistic regression models will be used to build a multi-class classifier. Since there are 10 classes, 10 separate logistic regression classifiers shall be trained. To make this training efficient, it is important to ensure that the code is well vectorized. A vectorized version of logistic regression that does not employ any for loops will be implemented.</p>
+
+<h3 id="vectorizing-the-cost-function">Vectorizing the Cost Function</h3>
+
+<p>Begin by writing a vectorized version of the cost function. Recall that in (unregularized) logistic regression, the cost function is</p>
+
+<p><code>$J(\theta)=\frac{1}{m} \sum_{i=1}^m[-y^{(i)} log(h_\theta (x^{(i)})-(1-y^{(i)}) log(1-h_\theta (x^{(i)}))]$</code></p>
+
+<p>To compute each element in the summation, we have to compute <code>$h_{\theta}(x^{(i)})$</code> for every example <code>$i$</code>, where <code>$h_{\theta}(x^{(i)})=g(\theta^{T}x^{(i)})$</code> and <code>$g(z) = \frac{1}{1+e^{-z}}$</code> is the sigmoid function. It turns out that this can be computed quickly for all the examples by using matrix multiplication. If <code>$X$</code> and <code>$\theta$</code> are defined as</p>
+
+<p><code>$X=\begin{bmatrix}
+    -(x^{(1)})^T-\\
+    -(x^{(2)})^T-\\
+    \vdots\\
+    -(x^{(m)})^T-
+\end{bmatrix}$</code></p>
+
+<p>and</p>
+
+<p><code>$\theta=\begin{bmatrix}
+    \theta_0\\
+    \theta_1\\
+    \vdots\\
+    \theta_n
+\end{bmatrix}$</code></p>
+
+<p>then, by computing the matrix product <code>$X\theta$</code>, it gives</p>
+
+<p><code>$X\theta=\begin{bmatrix}
+    -(x^{(1)})^T\theta-\\
+    -(x^{(2)})^T\theta-\\
+    \vdots\\
+    -(x^{(m)})^T\theta-
+\end{bmatrix}=\begin{bmatrix}
+    -\theta^T(x^{(1)})-\\
+    -\theta^T(x^{(2)})-\\
+    \vdots\\
+    -\theta^T(x^{(m)})-
+\end{bmatrix}$</code></p>
+
+<p>In the last equality, the fact that <code>$\alpha^Tb=b^T\alpha$</code> can be used since <code>$\alpha$</code> and <code>$b$</code> are vectors. This allows to compute the products <code>$\theta^TX^{(i)}$</code> for all our examples $i$ in one line of code. A fully vectorized version should not contain any loops.</p>
+
+<h3 id="vectorizing-the-gradient">Vectorizing the Gradient</h3>
+
+<p>Recall that the gradient of the (unregularized) logistic regression cost is a vector where the <code>$j^{th}$</code> element is defined as</p>
+
+<p><code>$\frac{\partial J}{\partial \theta_j}=\frac{1}{m} \sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}$</code></p>
+
+<p>To vectorize this operation over the dataset, we start by writing out all the partial derivatives explicitly for all <code>$\theta_j$</code>,</p>
+
+<p><code>$\begin{bmatrix}
+    \frac{\partial J}{\partial \theta_0}\\
+    \frac{\partial J}{\partial \theta_1}\\
+    \frac{\partial J}{\partial \theta_2}\\
+    \vdots\\
+    \frac{\partial J}{\partial \theta_n}\\
+\end{bmatrix}
+    =\frac{1}{m}
+\begin{bmatrix}
+    \sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})x_0^{(i)}\\
+    \sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})x_1^{(i)}\\
+    \sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})x_2^{(i)}\\
+    \vdots\\
+    \sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})x_n^{(i)}\\
+\end{bmatrix}=\frac{1}{m}X^T(h_{\theta}(x)-y)$</code></p>
+
+<p>where</p>
+
+<p><code>$h_{\theta}(x)-y=\begin{bmatrix}
+    h_\theta(x^{(1)})-y^{(1)}\\
+    h_\theta(x^{(2)})-y^{(2)}\\
+    \vdots\\
+    h_\theta(x^{(m)})-y^{(m)}\\
+\end{bmatrix}$</code></p>
+
+<p>Note that <code>$x^{(i)}$</code> is a vector, while <code>$h_\theta(x^{(i)})-y^{(i)}$</code> is a scalar (single number).</p>
+
+<h3 id="vectorizing-regularized-logistic-regression">Vectorizing Regularized Logistic Regression</h3>
+
+<p>The cost function for regularized logistic regression is defined as</p>
+
+<p><code>$J(\theta)=\frac{1}{m} \sum_{i=1}^m[-y^{(i)} log(h_\theta (x^{(i)})-(1-y^{(i)}) log(1-h_\theta (x^{(i)}))]+\frac{\lambda}{2m} \sum_{j=1}^n\theta_j^2$</code></p>
+
+<p>Note that the <code>$\theta_0$</code> which is used for the bias term should not be regularized. Correspondingly, the partial derivative of regularized logistic regression cost for <code>$\theta_j$</code> is defined as</p>
+
+<p><code>$\frac{\partial J(\theta)}{\partial \theta_0}=\frac{1}{m} \sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}$</code> for <code>$j=0$</code></p>
+
+<p><code>$\frac{\partial J(\theta)}{\partial \theta_j}=\frac{1}{m} \sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}+\frac{\lambda}{m}\theta_j$ for $j\geq1$</code></p>
+
+<p>Modify the code to account for regularization without any loops.</p>
+
+<pre><code class="language-python">def sigmoid(z):
+    &quot;&quot;&quot;
+    The sigmoid function.
+    Args:
+        z: float, vector, matrix
+    Returns:
+        sigmoid: float, vector, matrix
+    &quot;&quot;&quot;
+    sigmoid = 1 / (1 + np.exp(-z))
+    return sigmoid
+
+def computeCost(theta, X, y, lambda_coef):
+    &quot;&quot;&quot;
+    Compute the cost function.
+    Args:
+        theta: array shape(n+1, 1) 
+        X: array shape(m, n+1) 
+        y: array shape(m, 1)
+        lambda_coef: int
+    Returns:
+        cost: float
+    &quot;&quot;&quot;
+    m = X.shape[0]
+    # Do matrix multiplication with numpy.dot
+    h_theta = sigmoid(np.dot(X, theta))
+    term1 = np.dot(-y.T, np.log(h_theta))
+    term2 = np.dot((1 - y).T, np.log(1 - h_theta))
+    # Exclude theta_0!!!
+    reg_term = (lambda_coef / (2 * m)) * np.sum(np.square(theta[1:]))
+    cost = (np.sum(term1 - term2) / m) + reg_term
+    return cost
+
+def computeGradient(theta, X, y, lambda_coef):
+    &quot;&quot;&quot;
+    Compute the gradient.
+    Args:
+        theta: array shape(n+1, 1) 
+        X: array shape(m, n+1) 
+        y: array shape(m, 1)
+        lambda_coef: int
+    Returns:
+        gradient: array shape(n+1, m)
+    &quot;&quot;&quot;
+    m = X.shape[0]
+    h_theta = sigmoid(np.dot(X, theta))
+    # Exclude theta_0!!!
+    reg_term = (lambda_coef / m) * (theta[1:])
+    gradient = (1 / m) * np.dot(X.T, (h_theta - y))
+    gradient[1:] = gradient[1:] + reg_term
+    return gradient
+</code></pre>
+
+<h2 id="one-vs-all-classification">One-vs-all Classification</h2>
+
+<p>A one-vs-all classification will be implemented by training multiple regularized logistic regression classifiers, one for each of the <code>$K$</code> classes in the dataset. In the handwritten digits dataset, <code>$K=10$</code>, but the code should work for any value of <code>$K$</code>.</p>
+
+<p>The code should return all the classifier parameters in a matrix <code>$\theta\in{R^{K\times(N+1)}}$</code> , where each row of <code>$\theta$</code> corresponds to the learnt logistic regression parameters for one class. This can be done with a “for”-loop from <code>$1$</code> to <code>$K$</code>, training each classifier independently.</p>
+
+<p>Note that the <code>$y$</code> argument to this function is a vector of labels from 1 to 10, where the digit “0” have been mapped to the label 10 (to avoid confusions with indexing).</p>
+
+<p>When training the classifier for class <code>$k\in{\{1,...,K\}}$</code>, a m- dimensional vector of labels <code>$y$</code> is desirable, where <code>$y_j\in{0,1}$</code> indicates whether the <code>$j^{th}$</code> training instance belongs to class <code>$k$</code> <code>$(y_j=1)$</code>, or if it belongs to a different class <code>$(y_j=0)$</code>.</p>
+
+<pre><code class="language-python">from scipy.optimize import minimize
+
+def oneVsAll(X, y, K, lambda_coef):
+    &quot;&quot;&quot;
+    Train K logisitc regression classifiers 
+    and returns each of these classifiers
+    in an array Thetas, where the i-th row
+    corresponds to the classifier for label i.
+    Args:
+        X: array shape(m, n) 
+        y: array shape(m, 1)
+        K: int
+        lambda_coef: int
+    Returns:
+        Thetas: array shape(K, n+1)
+    &quot;&quot;&quot;    
+    # Get the number of training examples, m.
+    m = X.shape[0]
+    # Get the number of features, n.
+    n = X.shape[1]
+
+    # Create an array of shape(K, n+1) for each K class,
+    # i.e. for each digit 0 to 9.
+    Thetas = np.zeros((K, n+1))
+    
+    #Insert a 1's column to X.
+    X = np.insert(X, 0, 1, axis=1)
+
+    # Train each classifier independently from 1 to K.
+    for i in range(0, K):
+        print(&quot;Training the classifier for class k = {}...&quot;.format(i))
+        # Take into account that class &quot;10&quot; corresponds to &quot;0&quot;.
+        if i == 0:
+            x = 10
+        else:
+            x = i
+        # Initialize theta.
+        theta = np.zeros((n+1, 1))
+        y_i = np.array([1 if class_k == x else 0 for class_k in y])
+        y_i = np.reshape(y_i, (m, ))
+
+        # Minimize the cost function.
+        # Various methods were tested. It was found that 'TNC'
+        # is faster and gives very good results.
+        res = minimize(fun=computeCost, x0=theta, args=(X, y_i, lambda_coef),
+                       method='TNC', jac=computeGradient)
+        Thetas[i, :] = res.x
+    print(&quot;Training is completed!&quot;)
+    return Thetas
+</code></pre>
+
+<pre><code class="language-python">import warnings
+warnings.filterwarnings('ignore')
+
+Thetas = oneVsAll(X, y, 10, 0)
+</code></pre>
+
+<pre><code>Training the classifier for class k = 0...
+Training the classifier for class k = 1...
+Training the classifier for class k = 2...
+Training the classifier for class k = 3...
+Training the classifier for class k = 4...
+Training the classifier for class k = 5...
+Training the classifier for class k = 6...
+Training the classifier for class k = 7...
+Training the classifier for class k = 8...
+Training the classifier for class k = 9...
+Training is completed!
+</code></pre>
+
+<h3 id="one-vs-all-prediction">One-vs-all Prediction</h3>
+
+<p>After training the one-vs-all classifier, now it can be used to predict the digit contained in a given image. For each input, it should be computed the “probability” that it belongs to each class using the trained logistic regression classifiers. The one-vs-all prediction function will pick the class for which the corresponding logistic regression classifier outputs the highest probability and return the class label (1, 2,&hellip;, or K) as the prediction for the input example.</p>
+
+<pre><code class="language-python"># Create a prediction function.
+def predictOneVsAll(X, theta):
+    &quot;&quot;&quot;
+    Predict whether the label is 0 or 1 using the
+    learned logistic regression parameters Thetas.
+    Probability &quot;p&quot; computes the predictions for X
+    using a threshold at 0.5 i.e., if
+    sigmoid(np.dot(X, theta.T)) &gt;= 0.5, predict 1.
+    &quot;p&quot; is set to a vector of predictions (from 1 to K).
+    The numpy.argmax function returns the index of the
+    max element.
+    Args:
+        X: array shape(m, n)
+        theta: array shape(K, n+1), the optimal parameters
+    Returns:
+        p_argmax: list of &quot;m&quot; max p values
+    &quot;&quot;&quot;
+    #Insert a 1's column to X.
+    X = np.insert(X, 0, 1, axis=1) # shape(5000, 401)
+    p = sigmoid(np.dot(X, theta.T)) # shape(5000, 10)
+    p_argmax = np.argmax(p, axis=1) # shape(5000,)
+    # Replace 0's with 10's to fix that a “0” digit is labeled as “10”.
+    p_argmax = [10 if x == 0 else x for x in p_argmax]
+    return p_argmax
+
+predicted = predictOneVsAll(X, Thetas)
+correct = np.sum(predicted == y.reshape(-1))
+total = len(predicted)
+print('Accuracy score: {}%'.format(100 * correct / total))
+</code></pre>
+
+<pre><code>Accuracy score: 97.46%
+</code></pre>
+
+<h1 id="neural-networks">Neural Networks</h1>
+
+<p>In the previous part, a multi-class logistic regression was implemented to recognize handwritten digits. However, logistic regression cannot form more complex hypotheses as it is only a linear classifier. More features can be added (such as polynomial features) to logistic regression, but that can be very expensive to train.</p>
+
+<p>In this part, a neural network will be implemented to recognize handwritten digits using the same training set as before. The neural network will be able to represent complex models that form non-linear hypotheses. This time, there will be used parameters from a neural network that have been already trained. The goal is to implement the feedforward propagation algorithm to use the weights for prediction. In a next work, the backpropagation algorithm will be created for learning the neural network parameters.</p>
+
+<h2 id="model-representation">Model Representation</h2>
+
+<p>The neural network that will be used has 3 layers - an input layer, a hidden layer and an output layer. Recall that the inputs are pixel values of digit images. Since the images are of size 20x20, this gives 400 input layer units (excluding the extra bias unit which always outputs +1). As before, the training data will be loaded into the variables <code>$X$</code> and <code>$y$</code>.</p>
+
+<p>A set of already trained network parameters <code>$(\Theta^{(1)}, \Theta^{(2)})$</code> are stored in <code>ex3weights.mat</code> and will be loaded by <code>loadmat</code> into <code>Theta1</code> and <code>Theta2</code>. The parameters have dimensions that are sized for a neural network with 25 units in the second layer and 10 output units (corresponding to the 10 digit classes).</p>
+
+<h2 id="feedforward-propagation-and-prediction">Feedforward Propagation and Prediction</h2>
+
+<p>Feedforward propagation will be implemented for the neural network. That will compute <code>$h_\theta(x^{(i)})$</code> for every example <code>$i$</code> and will return the associated predictions. Similar to the one-vs-all classification strategy, the prediction from the neural network will be the label that has the largest output <code>$(h_\theta(x))_k$</code>.</p>
+
+<pre><code class="language-python">weights = loadmat('ex3weights.mat')
+
+Theta1 = weights['Theta1']
+Theta2 = weights['Theta2']
+
+print(&quot;Shape of Theta1: &quot;, Theta1.shape)
+print(&quot;Shape of Theta2: &quot;, Theta2.shape)
+
+# Create a prediction function.
+def predict(Theta1, Theta2, X):
+    &quot;&quot;&quot;
+    Predict the label of an input given a trained neural network.
+    Probability &quot;p&quot; outputs the predicted label of X given the
+    trained weights of a neural network (Theta1, Theta2).
+    &quot;u&quot; is the units in the second layer.
+    Args:
+        Theta1: array shape(u, n+1)
+        Theta2: array shape(K, u+1)
+        X: array shape(m, n)
+    Returns:
+        p_argmax: list of &quot;m&quot; max p values
+    &quot;&quot;&quot;
+    #Insert a 1's column to X.
+    X = np.insert(X, 0, 1, axis=1) # shape(5000, 401)
+    a2 = sigmoid(np.dot(X, Theta1.T)) # shape(5000, 25)
+    #Insert a 1's column to a2.
+    a2 = np.insert(a2, 0, 1, axis=1) # shape(5000, 26)
+    p = sigmoid(np.dot(a2, Theta2.T)) # shape(5000, 10)
+    p_argmax = np.argmax(p, axis=1) # shape(5000,)
+    # Add 1 to fix for zero indexed array.
+    p_argmax = p_argmax + 1
+    # Replace 0's with 10's to fix that a “0” digit is labeled as “10”.
+    p_argmax = [10 if x == 0 else x for x in p_argmax]
+    return p_argmax
+
+predicted = predict(Theta1, Theta2, X)
+correct = np.sum(predicted == y.reshape(-1))
+total = len(predicted)
+print('\nAccuracy score: {}%'.format(100 * correct / total))
+</code></pre>
+
+<pre><code>Shape of Theta1:  (25, 401)
+Shape of Theta2:  (10, 26)
+
+Accuracy score: 97.52%
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex2/">Logistic Regression</a></h4>
+    <h5>December 24, 2017</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">pandas</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex1/">Linear Regression</a></h4>
+    <h5>December 19, 2017</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">pandas</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/spamit/">Spam or Ham?</a></h4>
+    <h5>December 12, 2017</h5>
+     <kbd class="item-tag">nltk</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">pandas</kbd> 
+
+</div>
+ 
+
+    
+
+    
+
+        <h4 class="page-header">Comments</h4>
+
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "gtraskas" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+</main>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
