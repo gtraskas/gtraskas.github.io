@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Neural Networks Learning</title>
+        <style>
+
+    html body {
+        font-family: 'Lato', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: #0099CC;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/R.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Markdown.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.31.1" />
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', '');
+        </script>
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Neural Networks Learning</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/about/me">About</a></li>
+                            
+                                <li><a href="/project/">Projects</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:georgiost77@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/gtraskas/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/george-traskas/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex4/">Neural Networks Learning</a></h4>
+    <h5>January 18, 2018</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<p>This post covers the fourth exercise from Andrew Ng&rsquo;s Machine Learning Course on Coursera.</p>
+
+<hr />
+
+<h1 id="neural-networks-learning">Neural Networks Learning</h1>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>The backpropagation algorithm will be implemented for neural networks and it will be applied to the task of hand-written digit recognition.</p>
+
+<h1 id="neural-networks">Neural Networks</h1>
+
+<p>The backpropagation algorithm will be implemented to learn the parameters for the neural network.</p>
+
+<h2 id="visualizing-the-data">Visualizing the Data</h2>
+
+<p>Load the data and display it on a 2-dimensional plot by calling the function <code>displayData</code>.</p>
+
+<p>There are 5000 training examples in <code>ex3data1.mat</code>, where each training example is a 20 pixel by 20 pixel grayscale image of the digit. Each pixel is represented by a floating point number indicating the grayscale intensity at that location. The 20 by 20 grid of pixels is “unrolled” into a 400-dimensional vector. Each of these training examples becomes a single row in the data matrix <code>$X$</code>. This gives a 5000 by 400 matrix <code>$X$</code> where every row is a training example for a handwritten digit image.</p>
+
+<p><code>$$X=\begin{bmatrix}
+    -(x^{(1)})^T-\\
+    -(x^{(2)})^T-\\
+    \vdots\\
+    -(x^{(m)})^T-
+\end{bmatrix}$$</code></p>
+
+<p>The second part of the training set is a 5000-dimensional vector <code>$y$</code> that contains labels for the training set. To make things more compatible with Octave/MATLAB indexing, where there is no zero index, the digit zero has been mapped to the value ten. Therefore, a <code>0</code> digit is labeled as <code>10</code>, while the digits <code>1</code> to <code>9</code> are labeled as <code>1</code> to <code>9</code> in their natural order.</p>
+
+<pre><code class="language-python">import numpy as np 
+from scipy.io import loadmat
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+data = loadmat('ex3data1.mat')
+X = data['X']
+y = data['y']
+
+print(X.shape, y.shape)
+
+def displayData(X):
+    &quot;&quot;&quot;
+    Select randomly 100 rows from X,
+    plot them as 20x20 pixel grayscale images,
+    and combine them to one figure with all
+    100 digits.
+    &quot;&quot;&quot;
+    # Create 100 subplots and remove the gaps
+    # between the subplots with gridspec.
+    fig, axarr = plt.subplots(10, 10,
+                             figsize=(6, 6),
+                             gridspec_kw={'wspace':0,
+                                          'hspace':0})
+    for i in range(10):
+        for j in range(10):
+            # Select random indices.
+            idx = np.random.choice(len(X), 1)
+            # Index the array X with the indices.
+            pixels = X[idx] # shape(1, 400)
+            pixels = pixels.reshape(-1, 20) # shape(20, 20)
+            axarr[i,j].imshow(pixels.T, cmap='gray_r')
+            # Remove ticks.
+            axarr[i,j].set_xticks([])
+            axarr[i,j].set_yticks([])
+            # Turn off axes.
+            axarr[i,j].axis('off')
+    plt.show()
+
+displayData(X)
+</code></pre>
+
+<pre><code>(5000, 400) (5000, 1)
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/Sample_digits.png" alt="png" title="A sample of handwritten digits" /></p>
+
+<h2 id="model-representation">Model Representation</h2>
+
+<p>The neural network has 3 layers - an input layer, a hidden layer and an output layer. Recall that the inputs are pixel values of digit images. Since the images are of size <code>$20x20$</code>, this gives 400 input layer units (not counting the extra bias unit which always outputs +1). The training data will be loaded into the variables <code>$X$</code> and <code>$y$</code>.</p>
+
+<p>A set of already trained network parameters <code>$(\Theta^{(1)}, \Theta^{(2)})$</code> stored in <code>ex3weights.mat</code> will be loaded by <code>loadmat</code> into <code>Theta1</code> and <code>Theta2</code>. The parameters have dimensions that are sized for a neural network with 25 units in the second layer and 10 output units (corresponding to the 10 digit classes).</p>
+
+<pre><code class="language-python"># Initialize the parameters.
+# 20x20 Input images of digits
+input_layer_size  = 400
+
+# 25 Hidden units
+hidden_layer_size = 25
+
+# 10 Labels, from 1 to 10
+# Note that &quot;0&quot; has been mapped to &quot;10&quot;.
+num_labels = 10
+
+# Load the weights into variables Theta1 and Theta2.
+weights = loadmat('ex3weights.mat')
+Theta1 = weights['Theta1']
+Theta2 = weights['Theta2']
+
+# Create a list of my Thetas.
+Thetas = [Theta1, Theta2]
+
+# Unroll parameters and then merge/concatenate.
+unrolled_Thetas = [Thetas[i].ravel() for i,_ in enumerate(Thetas)]
+nn_params = np.concatenate(unrolled_Thetas)
+
+print(&quot;Shape of Theta1: &quot;, Theta1.shape)
+print(&quot;Shape of Theta2: &quot;, Theta2.shape)
+print(&quot;Shape of nn_params: &quot;, nn_params.shape)
+</code></pre>
+
+<pre><code>Shape of Theta1:  (25, 401)
+Shape of Theta2:  (10, 26)
+Shape of nn_params:  (10285,)
+</code></pre>
+
+<p>Figure 1 depicts a simple neural network with 3 layers. The first input layer has three units, the input units <code>$x_i$</code> and is expressed as:</p>
+
+<p><code>$$x=\alpha^{(1)}=(\alpha_1^{(1)},\alpha_2^{(1)},\alpha_3^{(1)})^T$$</code></p>
+
+<p>The second hidden layer is similarly:</p>
+
+<p><code>$$\alpha^{(2)}=(\alpha_1^{(2)},\alpha_2^{(2)},\alpha_3^{(2)})^T$$</code></p>
+
+<p>where</p>
+
+<p><code>$$\alpha_1^{(2)}=g(\Theta_{11}^{(1)}\alpha_1^{(1)}+\Theta_{12}^{(1)}\alpha_2^{(1)}+\Theta_{13}^{(1)}\alpha_3^{(1)})$$</code>
+<code>$$\alpha_2^{(2)}=g(\Theta_{21}^{(1)}\alpha_1^{(1)}+\Theta_{22}^{(1)}\alpha_2^{(1)}+\Theta_{23}^{(1)}\alpha_3^{(1)})$$</code>
+<code>$$\alpha_3^{(2)}=g(\Theta_{31}^{(1)}\alpha_1^{(1)}+\Theta_{32}^{(1)}\alpha_2^{(1)}+\Theta_{33}^{(1)}\alpha_3^{(1)})$$</code></p>
+
+<p>and <code>$g(z) = \frac{1}{1 + e^{-z}}$</code> is the logistic function.</p>
+
+<p>The third output layer has only one unit, which returns the hypothesis function:</p>
+
+<p><code>$$h_{\Theta}(x)=\alpha^{(3)}=(\alpha_1^{(3)})=g(\Theta_{11}^{(2)}\alpha_1^{(2)}+\Theta_{12}^{(2)}\alpha_2^{(2)}+\Theta_{13}^{(2)}\alpha_3^{(2)})$$</code></p>
+
+<p><img src="/coursera_ml_andrew/simple_nn.png" alt="Figure 1" title="Neural Network Model" /></p>
+
+<h2 id="feedforward-and-cost-function">Feedforward and Cost Function</h2>
+
+<p>First the cost function and gradient for the neural network will be implemented. Create a <code>nnCostFunction</code> fuction to return the cost. Recall that the cost function for the neural network (without regularization) is</p>
+
+<p><code>$$J(\theta)=\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K[-y_k^{(i)}log((h_\theta(x^{(i)})_k)-(1-y_k^{(i)})log((1-h_\theta (x^{(i)}))_k)]$$</code></p>
+
+<p>Note that <code>$h_{\theta}(x^{(i)})_k=\alpha_k^{(3)}$</code> is the activation (output value) of the <code>$k^{th}$</code> output unit. Also, recall that whereas the original labels (in the variable <code>$y$</code>) were 1, 2, &hellip;, 10, for the purpose of training a neural network, the labels should be recoded as vectors containing only values 0 or 1, so that</p>
+
+<p><code>$$y=\begin{bmatrix}
+    1\\
+    0\\
+    0\\
+    \vdots\\
+    0\\
+\end{bmatrix},\hspace{0.5cm}y=\begin{bmatrix}
+    0\\
+    1\\
+    0\\
+    \vdots\\
+    0\\
+\end{bmatrix},...\hspace{0.5cm}or\hspace{0.5cm}
+y=\begin{bmatrix}
+    0\\
+    0\\
+    0\\
+    \vdots\\
+    1\\
+\end{bmatrix}$$</code></p>
+
+<p>For example, if <code>$x^{(i)}$</code> is an image of the digit 5, then the corresponding <code>$y^{(i)}$</code> should be a 10-dimensional vector with <code>$y_5=1$</code>, and the other elements equal to 0.</p>
+
+<p>The feedforward computation that computes <code>$h_{\theta}(x^{(i)})$</code> should be implemented for every example <code>$i$</code> and the cost over all examples should be summed. The code should also work for a dataset of any size, with any number of labels assuming that there are always at least <code>$K≥3$</code> labels.</p>
+
+<p>** Note **</p>
+
+<p>The matrix <code>$X$</code> contains the examples in rows (i.e., <code>$X(i,:)$</code> is the i-th training example <code>$x^{(i)}$</code>, expressed as a <code>$nx1$</code> vector). To complete the code in <code>nnCostFunction</code> function, we need to add the column of <code>$1$</code>&rsquo;s to the <code>$X$</code> matrix. The parameters for each unit in the neural network are represented in <code>Theta1</code> and <code>Theta2</code> as one row. Speciffically, the first row of <code>Theta1</code> corresponds to the first hidden unit in the second layer. We can use a for-loop over the examples to compute the cost.</p>
+
+<h2 id="regularized-cost-function">Regularized Cost Function</h2>
+
+<p>For neural networks, the cost function with regularization is going to be slightly more complicated:</p>
+
+<p><code>$$J(\theta)=\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K[-y_k^{(i)}log((h_\theta(x^{(i)})_k)-(1-y_k^{(i)})log((1-h_\theta (x^{(i)}))_k)]+\frac{\lambda}{2m}\sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}(\Theta_{j,i}^{(1)})^2$$</code></p>
+
+<p>For the particular neural network with the 3 layers, the cost function is given by</p>
+
+<p><code>$$J(\theta)=\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K[-y_k^{(i)}log((h_\theta(x^{(i)})_k)-(1-y_k^{(i)})log((1-h_\theta (x^{(i)}))_k)]+\frac{\lambda}{2m}[\sum_{j=1}^{25}\sum_{k=1}^{400}(\Theta_{j,k}^{(1)})^2+\sum_{j=1}^{10}\sum_{k=1}^{25}(\Theta_{j,k}^{(2)})^2]$$</code></p>
+
+<p>We can assume that the neural network will only have 3 layers - an input layer, a hidden layer and an output layer. However, the code can work for any number of input units, hidden units and outputs units. While we have explicitly listed the indices above for <code>$\Theta^{(1)}$</code> and <code>$\Theta^{(2)}$</code> for clarity, do note that <strong>the code can in general work with <code>$\Theta^{(1)}$</code> and <code>$\Theta^{(2)}$</code> of any size.</strong></p>
+
+<p>Note that we should not be regularizing the terms that correspond to the bias. For the matrices <code>Theta1</code> and <code>Theta2</code>, this corresponds to the first column of each matrix. Calling <code>nnCostFunction</code> using the loaded set of parameters for <code>Theta1</code> and <code>Theta2</code>, and <code>$\lambda=1$</code> we should see that the cost is about <code>0.383770</code>.</p>
+
+<h1 id="backpropagation">Backpropagation</h1>
+
+<p>To implement the backpropagation algorithm we have to compute the gradient for the neural network cost function. We need to complete the <code>nnCostFunction</code> so that it returns an appropriate value for grad. Once we have computed the gradient, we will be able to train the neural network by minimizing the cost function <code>$J(\Theta)$</code> using an advanced optimizer from <code>scipy</code> such as the <code>minimize</code> function.</p>
+
+<h2 id="sigmoid-gradient">Sigmoid Gradient</h2>
+
+<p>Before the implementation of backpropagation, we need first to implement the sigmoid gradient function. The gradient for the sigmoid function can be computed as</p>
+
+<p><code>$$g'(z)=\frac{d}{dz}g(z)=g(z)(1-g(z))$$</code></p>
+
+<p>where</p>
+
+<p><code>$$sigmoid(z)=g(z)=\frac{1}{1+e^{-z}}$$</code></p>
+
+<p>When we are done, we can try testing a few values by calling <code>sigmoidGradient(z)</code>. For large values (both positive and negative) of <code>$z$</code>, the gradient should be close to <code>$0$</code>. When <code>$z=0$</code>, the gradient should be exactly <code>$0.25$</code>. The code can also work with vectors and matrices. For a matrix, the function can perform the sigmoid gradient function on every element.</p>
+
+<h2 id="random-initialization">Random Initialization</h2>
+
+<p>When training neural networks, it is important to randomly initialize the parameters for symmetry breaking. One effective strategy for random initialization is to randomly select values for <code>$\Theta^{(l)}$</code> uniformly in the range <code>$[-\epsilon_{init},\epsilon_{init}]$</code>.</p>
+
+<p>We should use <code>$\epsilon_{init}=0.12$</code>. This range of values ensures that the parameters are kept small and makes the learning more efficient. We need to implement a function <code>randInitializeWeights</code> that will initialize the weights for <code>$\Theta$</code>.</p>
+
+<p><strong>Note</strong> One effective strategy for choosing <code>$\epsilon_{init}$</code> is to base it on the number of units in the network. A good choice of <code>$\epsilon_{init}$</code> is</p>
+
+<p><code>$$\epsilon_{init}=\frac{\sqrt{6}}{\sqrt{L_{in}+L_{out}}}$$</code></p>
+
+<p>where <code>$L_{in}=s_l$</code> and <code>$L_{out}=s_{l}+1$</code> are the number of units in the layers adjacent to <code>$\Theta^{(l)}$</code>.</p>
+
+<h2 id="backpropagation-1">Backpropagation</h2>
+
+<p>Now, we can implement the backpropagation algorithm. Recall that the intuition behind the backpropagation algorithm is as follows. Given a training example <code>$(x^{(t)},y^{(t)})$</code>, we will first run a &ldquo;forward pass&rdquo; to compute all the activations throughout the network, including the output value of the hypothesis <code>$h_{\theta}(x)$</code>. Then, for each node <code>$j$</code> in layer <code>$l$</code>, we would like to compute an &ldquo;error term&rdquo; <code>$\delta_j^{(l)}$</code> that measures how much that node was &ldquo;responsible&rdquo; for any errors in our output.</p>
+
+<p>For an output node, we can directly measure the difference between the network&rsquo;s activation and the true target value, and use that to define <code>$\delta_j^{(3)}$</code> (since layer <code>$3$</code> is the output layer). For the hidden units, we will compute <code>$\delta_j^{(l)}$</code> based on a weighted average of the error terms of the nodes in layer <code>$(l+1)$</code>.</p>
+
+<p>In detail, the backpropagation algorithm is shown in Figure 2. To accomplish this we have to implement steps 1 to 4 in a loop that processes one example at a time. Concretely, we should implement a <code>for-loop</code> for <code>$t=1:m$</code> and place steps 1-4 below inside the for-loop, with the <code>$t^{th}$</code> iteration performing the calculation on the <code>$t^{th}$</code> training example <code>$(x^{(t)},y^{(t)})$</code>. Step 5 will divide the accumulated gradients by <code>$m$</code> to obtain the gradients for the neural network cost function.</p>
+
+<p><img src="/coursera_ml_andrew/backprop.png" alt="Figure 2" title="Backpropagation Algorithm" /></p>
+
+<ol>
+<li><p>Set the input layer&rsquo;s values <code>$(a^{(1)})$</code> to the <code>$t^{th}$</code> training example <code>$x^{(t)}$</code>. Perform a feedforward pass (see Figure 3), computing the activations <code>$(z^{(2)},\alpha^{(2)},z^{(3)}, \alpha^{(3)})$</code> for layers <code>$2$</code> and <code>$3$</code>. Note that we need to add a <code>$+1$</code> term to ensure that the vectors of activations for layers <code>$\alpha^{(1)}$</code> and <code>$\alpha^{(2)}$</code> also include the bias unit.</p>
+
+<p><img src="/coursera_ml_andrew/nnModel.png" alt="Figure 3" title="Feedforward Pass" /></p></li>
+
+<li><p>For each output unit <code>$k$</code> in layer <code>$3$</code> (the output layer), set <code>$$\delta_k^{(3)}=(\alpha_k^{(3)}-y_k)$$</code> where <code>$y_k\in{\{0,1\}}$</code> indicates whether the current training example belongs to class <code>$k(y_k=1)$</code>, or if it belongs to a different class <code>$(y_k=0)$</code>.</p></li>
+
+<li><p>For the hidden layer <code>$l=2$</code>, set <code>$$\delta^{(2)}=(\Theta^{(2)})^T\delta^{(3)}.*g'(z^{(2)})$$</code> Intuitively, <code>$\delta_j^{(l)}$</code> is the &ldquo;error&rdquo; for <code>$\alpha_j^{(l)}$</code> (unit <code>$j$</code> in layer <code>$l$</code>). More formally, the delta values are actually the derivative of the cost function, <code>$\delta_j^{(l)}=\frac{\partial}{\partial{z_j^{(l)}}}cost(t)$</code>. Recall that our derivative is the slope of a line tangent to the cost function, so the steeper the slope the more incorrect we are.</p></li>
+
+<li><p>Accumulate the gradient from this example using the following formula. Note that we should skip or remove <code>$\delta_0^{(2)}$</code>. <code>$$\Delta^{(l)}=\Delta^{(l)}+\delta^{(l+1)}(\alpha^{(l)})^T$$</code></p></li>
+
+<li><p>Obtain the gradient for the neural network (with regularization) cost function by dividing the accumulated gradients by <code>$\frac{1}{m}$</code>: <code>$$\frac{\partial}{\partial{\Theta_{ij}^{(l)}}}J(\Theta)=D_{ij}^{(l)}=\frac{1}{m}\Delta_{ij}^{(l)}\hspace{20pt}for\hspace{20pt}j=0$$</code> <code>$$\frac{\partial}{\partial{\Theta_{ij}^{(l)}}}J(\Theta)=D_{ij}^{(l)}=\frac{1}{m}\Delta_{ij}^{(l)}+\frac{\lambda}{m}\Theta_{ij}^{(l)}\hspace{20pt}for\hspace{20pt}j\geq1$$</code> Note that we should not be regularizing the first column of <code>$\Theta^{(l)}$</code> which is used for the bias term. Furthermore, in the parameters <code>$\Theta_{ij}^{(l)}$</code>, <code>$i$</code> is indexed starting from <code>$1$</code>, and <code>$j$</code> is indexed starting from <code>$0$</code>. Thus, <code>$$\Theta^{(1)}=\begin{bmatrix}\Theta_{1,0}^{(i)}&amp;\Theta_{1,1}^{(l)}&amp;\dots\\\Theta_{2,0}^{(i)}&amp;\Theta_{2,1}^{(l)}&amp;\dots\\\vdots&amp;\vdots&amp;\ddots\\\end{bmatrix}$$</code></p></li>
+</ol>
+
+<p>After we have implemented the backpropagation algorithm, we should implement gradient checking. The gradient checking will allow us to increase our confidence that our code is computing the gradients correctly. If the code is correct, we should expect to see a relative difference that is less than <code>1e-9</code>.</p>
+
+<h3 id="summarizing-the-algorithms">Summarizing the Algorithms</h3>
+
+<p>In general, the vectorized algorithms to be applied are:</p>
+
+<p><strong>Forward Propagation</strong></p>
+
+<ol>
+<li><code>$\alpha^{(1)}=x$</code></li>
+<li><code>$\text{for }l=1,...,L-1:$</code></li>
+<li><code>$\quad z^{(l+1)}=\Theta^{(l)}a^{(l)}$</code></li>
+<li><code>$\quad \alpha^{(l+1)}=g(z^{(l+1)})$</code></li>
+<li><code>$\text{end}$</code></li>
+<li><code>$h_{\Theta}(x)=\alpha^{(L)}$</code></li>
+</ol>
+
+<p><strong>Back Propagation</strong></p>
+
+<ol>
+<li><code>$\delta^{(L)}=a^{(L)}-y$</code></li>
+<li><code>$\text{for } l= L-1,...,2:$</code></li>
+<li><code>$\quad \delta^{(l)}=(\Theta^{(l)})^T\delta^{(l + 1)}.*g'(z^{(l)})$</code></li>
+<li><code>$\text{end}$</code></li>
+</ol>
+
+<p><strong>Algorithm for the gradient of $J(\Theta)$</strong></p>
+
+<ol>
+<li><code>$\text{Set } \Delta^{(l)}:=0, \text{ for } l=1, ..., L-1$</code></li>
+<li><code>$\text{For training example } t=1, ..., m:$</code></li>
+<li><code>$\quad \text{Set } \alpha^{(1)}=x^{(t)}$</code></li>
+<li><code>$\quad \text{Perform forward propagation to compute } \alpha^{(l)} \text{ for } l=1,...,L$</code></li>
+<li><code>$\quad \text{Using } y^{(t)}, \text{ compute } \delta^{(L)}=\alpha^{(L)}-y^{(t)}$</code></li>
+<li><code>$\quad \text{Perform back propagation computing }$</code>
+<code>$\quad \delta^{(L-1)},\delta^{(L-2)},...,\delta^{(2)} \text{ using } \delta^{(l)}=(\Theta^{(l)})^T\delta^{(l + 1)}.*g'(z^{(l)}) \text{ where } g'(z^{(l)})=\alpha^{(l)}.*(1-\alpha^{(l)})$</code></li>
+<li><code>$\quad \Delta^{(l)}:=\Delta^{(l)}+\delta^{(l+1)}(a^{(l)})^T \text{ for } l=L-1, ..., 1$</code></li>
+<li><code>$\text{end}$</code></li>
+</ol>
+
+<p>Hence we update our new <code>$\Delta$</code> matrix.</p>
+
+<p><code>$D_{ij}^{(l)}:=\frac{1}{m}\Delta_{ij}^{(l)}\text{ for }j=0$</code></p>
+
+<p><code>$D_{ij}^{(l)}:=\frac{1}{m}(\Delta_{ij}^{(l)}+\lambda \Theta_{ij}^{(l)})\text{ for }j\geq1$</code></p>
+
+<p>The capital-delta matrix <code>$D$</code> is used as an &ldquo;accumulator&rdquo; to add up our values as we go along and eventually compute our partial derivative, <code>$\frac{\partial}{\partial{\Theta_{ij}^{(l)}}}J(\Theta)=D_{ij}^{(l)}$</code>.</p>
+
+<pre><code class="language-python"># Create the logistic sigmoid function.
+def sigmoid(z):
+    &quot;&quot;&quot;
+    Computes the sigmoid function.
+    Args:
+        z: float, vector, matrix
+    Returns:
+        sigmoid: float, vector, matrix
+    &quot;&quot;&quot;
+    sigmoid = 1 / (1 + np.exp(-z))
+    return sigmoid
+
+# Create the sigmoid gradient function.
+def sigmoidGradient(z):
+    &quot;&quot;&quot;
+    Computes the gradient of the sigmoid function
+    evaluated at z. This works regardless if z is
+    a matrix or a vector. In particular, if z is
+    a vector or matrix, it returns the gradient for
+    each element.
+    Args:
+        z: float, vector, matrix
+    Returns:
+        g_prime: float, vector, matrix
+    &quot;&quot;&quot;
+    g_prime = sigmoid(z) * (1 - sigmoid(z))
+    return g_prime
+
+# Create the neural network cost function.
+def nnCostFunction(nn_params,
+                   input_layer_size,
+                   hidden_layer_size,
+                   num_labels,
+                   X, y, lambda_coef):
+    &quot;&quot;&quot;
+    Implements the neural network cost function for a two layer
+    neural network which performs classification.
+    Computes the cost and gradient of the neural network. The
+    parameters for the neural network are &quot;unrolled&quot; into the vector
+    nn_params and are converted back into the weight matrices.
+    The returned parameter grad is an &quot;unrolled&quot; vector of the
+    partial derivatives of the neural network.
+    Args:
+        nn_params: vector array
+        input_layer_size: int
+        hidden_layer_size: int
+        num_labels: int
+        X: array (m, input_layer_size)
+        y: array (m, num_labels)
+        lambda_coef: int
+    Returns:
+        J: float
+        grad: vector array
+    &quot;&quot;&quot;
+    # Reshape nn_params back into the parameters Theta1 and Theta2,
+    # the weight matrices for our 2 layer neural network.
+    Theta1 = np.reshape(nn_params[:hidden_layer_size * (input_layer_size + 1)],
+                        (hidden_layer_size, input_layer_size + 1)) # (25,401)
+    Theta2 = np.reshape(nn_params[hidden_layer_size * (input_layer_size + 1):],
+                        (num_labels, hidden_layer_size + 1)) # (10,26)
+
+    # Get the number of training examples, m.
+    m = X.shape[0]
+    
+    # Insert a 1's column for the bias unit.
+    X = np.insert(X, 0, 1, axis=1) # (5000,401)
+    
+    # Perform forward propagation to compute a(l) for l=1,...,L.
+    # z(l+1) = theta(l)a(l) and a(l+1) = g(z(l+1)).
+    z2 = np.dot(X, Theta1.T) # (5000, 25)
+    a2 = sigmoid(z2) # (5000, 25)
+    
+    # Add 1's for the bias unit.
+    a2 = np.insert(a2, 0, 1, axis=1) # (5000,26)
+    z3 = np.dot(a2, Theta2.T) # (5000, 10)
+    a3 = sigmoid(z3) # (5000, 10)
+    
+    # Create a y matrix of shape (m, K)
+    # for later use in recoding.
+    y_recoded = np.zeros((m, num_labels)) # (5000, 10)
+    
+    # Initialize Delta matrices.
+    D1 = np.zeros((hidden_layer_size, input_layer_size + 1)) # (25,401)
+    D2 = np.zeros((num_labels, hidden_layer_size + 1)) # (10,26)
+    
+    #############################################################
+    ########## Forward Propagation and Cost Computation #########
+    #############################################################
+    
+    # Initialize cost.
+    j = 0
+    # Fwd pass; for training example t = 1,...,m:
+    for t in range(m):
+        x_t = X[t]
+        
+        # Recode the categorical integer values of  y
+        # as vectors with all values set to zeros except
+        # for one value set to &quot;1&quot;, which indicates whether
+        # it belongs to class k (yk = 1).
+        y_recoded[t, y[t] - 1] = 1
+            
+        # Compute cost for every training example.
+        j += np.sum(-y_recoded[t] * np.log(a3[t]) - \
+                   (1 - y_recoded[t]) * np.log(1 - a3[t])) # float
+
+        ###############################################################
+        ########## Back Propagation and Gradients Computation #########
+        ###############################################################
+    
+        # Compute the error delta.
+        d_3 = a3[t] - y_recoded[t] # (10,)
+        d_3 = d_3.reshape(-1,1) # (10,1)
+        
+        # Perform back propagation.
+        # In the parameters Thetas_i,j, i are indexed
+        # starting from 1, and j is indexed starting from  0.
+        # (25,10)x(10,1).*(25,1) = (25,1)
+        d_2 = np.dot(Theta2.T[1:,:], d_3) * \
+                     sigmoidGradient(z2[t].reshape(-1,1))
+        D1 += np.dot(d_2, x_t.reshape(-1, 1).T) # (25,401)
+        D2 += np.dot(d_3, a2[t].reshape(1,-1)) # (10,26)
+
+    # Compute total cost.
+    J = j / m # float
+    
+    # Compute the regularization term.
+    # We should not be regularizing the first column of theta,
+    # which is used for the bias term.
+    Theta1_sum = np.sum(np.square(Theta1[:,1:])) # float
+    Theta2_sum = np.sum(np.square(Theta2[:,1:])) # float
+    reg_term = Theta1_sum + Theta2_sum # float
+    
+    # Compute total cost with regularization.
+    J = J + (lambda_coef / (2 * m)) * reg_term # float
+    
+    # Update our new Delta matrices with regularization.
+    # We should not be regularizing the first column of theta,
+    # which is used for the bias term.
+    # First devide every value in Deltas with m.
+    D1 = D1 / m
+    D2 = D2 / m
+    D1[:,1:] = D1[:,1:] + (lambda_coef / m) * Theta1[:,1:]
+    D2[:,1:] = D2[:,1:] + (lambda_coef / m) * Theta2[:,1:]
+    
+    # Unroll gradients.
+    Deltas = [D1, D2]
+    unrolled_Deltas = [Deltas[i].ravel() for i,_ in enumerate(Deltas)]
+    grad = np.concatenate(unrolled_Deltas)
+
+    return J, grad
+
+# Create the randomly weights-initialization function.
+def randInitializeWeights(L_in, L_out):
+    &quot;&quot;&quot;
+    Randomly initialize the weights of a layer with L_in
+    incoming connections and L_out outgoing connections.
+    Note that the column row of W handles the &quot;bias&quot; terms.
+    Args:
+        L_in: int
+        L_out: int
+    Returns:
+        W: array (L_out, 1 + L_in)
+    &quot;&quot;&quot;
+    # Set the range epsilon.
+    epsilon_init = 0.12
+    
+    # Initialize the W matrix.
+    W = np.zeros((L_out, 1 + L_in))
+    
+    # Produce the random values in the range [-epsilon, epsilon].
+    W = np.random.rand(L_out, 1 + L_in) * (2 * epsilon_init) - epsilon_init
+    return W
+
+nnCostFunction(nn_params,
+                   input_layer_size,
+                   hidden_layer_size,
+                   num_labels,
+                   X, y, 1)
+</code></pre>
+
+<pre><code>(0.38376985909092348,
+ array([  6.18712766e-05,  -2.11248326e-12,   4.38829369e-13, ...,
+          4.70513145e-05,  -5.01718610e-04,   5.07825789e-04]))
+</code></pre>
+
+<h2 id="gradient-checking">Gradient Checking</h2>
+
+<p>In our neural network, we are minimizing the cost function <code>$J(\Theta)$</code>. To perform gradient checking on our parameters, we can imagine “unrolling” the parameters <code>$\Theta^{(1)}$</code>, <code>$\Theta^{(2)}$</code> into a long vector <code>$\theta$</code>. By doing so, we can think of the cost function being <code>$J(\theta)$</code> instead and use the following gradient checking procedure.</p>
+
+<p>Suppose we have a function <code>$f_i(\theta)$</code> that purportedly computes <code>$\frac{\partial}{\partial{\theta_i}}J(\theta)$</code>; We would like to check if <code>$f_i$</code> is outputting correct derivative values.</p>
+
+<p><code>$$Let\hspace{10pt}\theta^{(i+)}=\theta+\begin{bmatrix}
+    0\\
+    0\\
+    \vdots\\
+    \epsilon\\
+    \vdots\\
+    0\\
+\end{bmatrix}\hspace{10pt}and\hspace{10pt}\theta^{(i-)}=\theta-\begin{bmatrix}
+    0\\
+    0\\
+    \vdots\\
+    \epsilon\\
+    \vdots\\
+    0\\\end{bmatrix}$$</code></p>
+
+<p>So, <code>$\theta^{(i+)}$</code> is the same as <code>$\theta$</code>, except its <code>$i^{th}$</code> element has been incremented by <code>$\epsilon$</code>. Similarly, <code>$\theta^{(i-)}$</code> is the corresponding vector with the <code>$i^{th}$</code> element decreased by <code>$\epsilon$</code>. We can now numerically verify <code>$f_i(\theta)$</code>’s correctness by checking, for each <code>$i$</code>, that:</p>
+
+<p><code>$$f_i(\theta)\approx\frac{J(\theta^{(i+)})-J(\theta^{(i-)})}{2\epsilon}$$</code></p>
+
+<p>The degree to which these two values should approximate each other will depend on the details of <code>$J$</code>. But assuming <code>$\epsilon=10^{−4}$</code>, we’ll usually find that the left- and right-hand sides of the above will agree to at least 4 significant digits (and often many more).</p>
+
+<p>The implementation of the computation of the numerical gradient is achieved with the <code>computeNumericalGradient</code> function.</p>
+
+<p>Next, we can run the function <code>checkNNGradients</code> which will create a small neural network and dataset that will be used for checking our gradients. If the backpropagation implementation is correct, we should see a relative difference that is less than <code>$10^{-9}$</code>.</p>
+
+<p><strong>Tips:</strong></p>
+
+<ol>
+<li><p>When performing gradient checking, it is much more efficient to use a small neural network with a relatively small number of input units and hidden units, thus having a relatively small number of parameters. Each dimension of <code>$\theta$</code> requires two evaluations of the cost function and this can be expensive. In the function <code>checkNNGradients</code>, our code creates a small random model and dataset which is used with <code>computeNumericalGradient</code> for gradient checking. Furthermore, after we are confident that our gradient computations are correct, we should turn off gradient checking before running our learning algorithm.</p></li>
+
+<li><p>Gradient checking works for any function where we are computing the cost and the gradient. Concretely, we can use the same <code>computeNumericalGradient</code> function to check if our gradient implementations for the other cases are correct too, e.g. logistic regression’s cost function.</p></li>
+</ol>
+
+<pre><code class="language-python">def debugInitializeWeights(fan_out, fan_in):
+    &quot;&quot;&quot;
+    Initialize the weights of a layer with fan_in
+    incoming connections and fan_out outgoing
+    connections using a fix set of values. This will
+    help us in debugging.
+    Note that W should be set to a matrix of size
+    (1 + fan_in, fan_out) as the first row of W
+    handles the &quot;bias&quot; terms.
+    Args:
+        fan_in: int
+        fan_out: int
+    Returns:
+        W: array (fan_out, 1 + fan_in)
+    &quot;&quot;&quot;
+    # Initialize the W matrix.
+    W = np.zeros((fan_out, 1 + fan_in))
+    
+    # The &quot;sin&quot; function ensures that W is always of
+    # the same values and will be useful for debugging.
+    W = np.reshape(np.sin(range(W.size)), W.shape) / 10
+    
+    return W
+
+def computeNumericalGradient(J, theta):
+    &quot;&quot;&quot;
+    Computes the numerical gradient of the function J
+    around theta using &quot;finite differences&quot; and gives
+    a numerical estimate of the gradient.
+    Notes: The following code implements numerical
+           gradient checking, and returns the numerical
+           gradient. It sets numgrad(i) to (a numerical 
+           approximation of) the partial derivative of J
+           with respect to the i-th input argument,
+           evaluated at theta. (i.e., numgrad(i) should
+           be the (approximately) the partial derivative
+           of J with respect to theta(i).)
+    Args:
+        J: function
+        theta: vector array
+    Returns:
+        numgrad: vector array
+    &quot;&quot;&quot;
+    # Initialize parameters.
+    numgrad = np.zeros(theta.shape)
+    perturb = np.zeros(theta.shape)
+    e = 1e-4
+
+    for p in range(theta.size):
+        # Set the perturbation vector.
+        perturb.reshape(perturb.size)[p] = e
+        loss1, _ = J(theta - perturb)
+        loss2, _ = J(theta + perturb)
+        # Compute the Numerical Gradient.
+        numgrad.reshape(numgrad.size)[p] = (loss2 - loss1) / (2 * e)
+        perturb.reshape(perturb.size)[p] = 0
+        
+    return numgrad
+
+def checkNNGradients(lambda_coef):
+    &quot;&quot;&quot;
+    Creates a small neural network to check the
+    backpropagation gradients. It will output the
+    analytical gradients produced by the backprop
+    code and the numerical gradients (computed
+    using computeNumericalGradient). These two
+    gradient computations should result in very
+    similar values.
+    Args:
+        lambda_coef: int
+    &quot;&quot;&quot;
+    # Initialize a small network.
+    input_layer_size = 3
+    hidden_layer_size = 5
+    num_labels = 3
+    m = 5
+
+    # Generate some 'random' test data.
+    Theta1 = debugInitializeWeights(hidden_layer_size, input_layer_size)
+    Theta2 = debugInitializeWeights(num_labels, hidden_layer_size)
+    
+    # Reuse debugInitializeWeights to generate X.
+    X  = debugInitializeWeights(m, input_layer_size - 1)
+    # np.mod returns element-wise remainder of division.
+    y  = 1 + np.mod(range(m), num_labels).T
+
+    # Unroll parameters.
+    Thetas = [Theta1, Theta2]
+    unrolled_Thetas = [Thetas[i].ravel() for i,_ in enumerate(Thetas)]
+    nn_params = np.concatenate(unrolled_Thetas)
+
+    # Create short hand for cost function.
+    def costFunc(p):
+        return nnCostFunction(p, input_layer_size, hidden_layer_size,
+                              num_labels, X, y, lambda_coef)
+
+    _, grad = costFunc(nn_params)
+    numgrad = computeNumericalGradient(costFunc, nn_params)
+
+    # Visually examine the two gradient computations.
+    # The two columns should be very similar. 
+    for numerical, analytical in zip(numgrad, grad):
+        print('Numerical Gradient: {0:10f}, Analytical Gradient {1:10f}'.\
+              format(numerical, analytical))
+    print('\nThe above two columns should be very similar.')
+
+    # Evaluate the norm of the difference between two solutions.  
+    # If we have a correct implementation, and assuming we used e = 0.0001 
+    # in computeNumericalGradient, then diff below should be less than 1e-9.
+    diff = np.linalg.norm(numgrad-grad) / np.linalg.norm(numgrad+grad)
+
+    print('If the backpropagation implementation is correct, then \n' \
+             'the relative difference will be small (less than 1e-9). \n' \
+             '\nRelative Difference: {:.10E}'.format(diff))
+
+checkNNGradients(0)
+</code></pre>
+
+<pre><code>Numerical Gradient:   0.006907, Analytical Gradient   0.006907
+Numerical Gradient:  -0.000111, Analytical Gradient  -0.000111
+Numerical Gradient:   0.000144, Analytical Gradient   0.000144
+Numerical Gradient:   0.000266, Analytical Gradient   0.000266
+Numerical Gradient:   0.012125, Analytical Gradient   0.012125
+Numerical Gradient:  -0.000043, Analytical Gradient  -0.000043
+Numerical Gradient:   0.000152, Analytical Gradient   0.000152
+Numerical Gradient:   0.000207, Analytical Gradient   0.000207
+Numerical Gradient:   0.006198, Analytical Gradient   0.006198
+Numerical Gradient:   0.000064, Analytical Gradient   0.000064
+Numerical Gradient:   0.000020, Analytical Gradient   0.000020
+Numerical Gradient:  -0.000042, Analytical Gradient  -0.000042
+Numerical Gradient:  -0.005424, Analytical Gradient  -0.005424
+Numerical Gradient:   0.000113, Analytical Gradient   0.000113
+Numerical Gradient:  -0.000130, Analytical Gradient  -0.000130
+Numerical Gradient:  -0.000253, Analytical Gradient  -0.000253
+Numerical Gradient:  -0.012076, Analytical Gradient  -0.012076
+Numerical Gradient:   0.000057, Analytical Gradient   0.000057
+Numerical Gradient:  -0.000161, Analytical Gradient  -0.000161
+Numerical Gradient:  -0.000231, Analytical Gradient  -0.000231
+Numerical Gradient:   0.102286, Analytical Gradient   0.102286
+Numerical Gradient:   0.050959, Analytical Gradient   0.050959
+Numerical Gradient:   0.049651, Analytical Gradient   0.049651
+Numerical Gradient:   0.053277, Analytical Gradient   0.053277
+Numerical Gradient:   0.049845, Analytical Gradient   0.049845
+Numerical Gradient:   0.050705, Analytical Gradient   0.050705
+Numerical Gradient:   0.099593, Analytical Gradient   0.099593
+Numerical Gradient:   0.050232, Analytical Gradient   0.050232
+Numerical Gradient:   0.047839, Analytical Gradient   0.047839
+Numerical Gradient:   0.051921, Analytical Gradient   0.051921
+Numerical Gradient:   0.048977, Analytical Gradient   0.048977
+Numerical Gradient:   0.048743, Analytical Gradient   0.048743
+Numerical Gradient:   0.296932, Analytical Gradient   0.296932
+Numerical Gradient:   0.148333, Analytical Gradient   0.148333
+Numerical Gradient:   0.142656, Analytical Gradient   0.142656
+Numerical Gradient:   0.156193, Analytical Gradient   0.156193
+Numerical Gradient:   0.144171, Analytical Gradient   0.144171
+Numerical Gradient:   0.146350, Analytical Gradient   0.146350
+
+The above two columns should be very similar.
+If the backpropagation implementation is correct, then 
+the relative difference will be small (less than 1e-9). 
+
+Relative Difference: 1.8750864672E-11
+</code></pre>
+
+<h2 id="learning-parameters">Learning Parameters</h2>
+
+<p>After we have successfully implemented the neural network cost function and gradient computation, the next step is to use an optimization function such as <code>minimize</code> to learn a good set parameters.</p>
+
+<p>After the training completes, we can proceed to report the training accuracy of our classifier by computing the percentage of examples it got correct. If our implementation is correct, we should see a reported training accuracy of about <code>$95\%$</code> (this may vary by about <code>$1%$</code> due to the random initialization). It is possible to get higher training accuracies by training the neural network for more iterations. We can try training the neural network for more iterations (e.g., set <code>MaxIter</code> to <code>400</code>) and also vary the regularization parameter <code>$\lambda$</code>. With the right learning settings, it is possible to get the neural network to perfectly fit the training set.</p>
+
+<pre><code class="language-python">from scipy.optimize import minimize
+
+# Create a cost function optimizer.
+def optimizeCost(maxiter, lambda_coef):
+    &quot;&quot;&quot;
+    Optimizes the Cost Function.
+    Args:
+        maxiter: int
+        lambda_coef: float
+    Returns:
+        thetas: vector array
+    &quot;&quot;&quot;
+    ##########################################
+    ########## Initialize nn_params ##########
+    ##########################################
+    Theta1 = randInitializeWeights(input_layer_size, hidden_layer_size)
+    Theta2 = randInitializeWeights(hidden_layer_size, num_labels)
+    # Unroll parameters.
+    Thetas = [Theta1, Theta2]
+    unrolled_Thetas = [Thetas[i].ravel() for i,_ in enumerate(Thetas)]
+    nn_params = np.concatenate(unrolled_Thetas)
+    
+    ##########################################
+    ##########       Optimize       ##########
+    ##########################################
+    # Optimize the cost function.
+    results = minimize(fun=nnCostFunction,
+                       x0=nn_params,
+                       args=(input_layer_size,
+                             hidden_layer_size,
+                             num_labels,
+                             X, y, lambda_coef),
+                       method='CG',
+                       jac=True,
+                       options={'maxiter':maxiter, 'disp': True})
+    thetas = results.x
+
+    return thetas
+
+# Train the neural network for 40 iterations.
+# Set regularization parameter to 1.
+nn_params = optimizeCost(40, 1)
+</code></pre>
+
+<pre><code>Warning: Maximum number of iterations has been exceeded.
+         Current function value: 0.490673
+         Iterations: 40
+         Function evaluations: 84
+         Gradient evaluations: 84
+</code></pre>
+
+<pre><code class="language-python"># Create the prediction function
+def predict(Theta1, Theta2, X):
+    &quot;&quot;&quot;
+    Predicts the label of an input X
+    given the trained weights of a
+    neural network (Theta1, Theta2).
+    Args:
+        Theta1: array (hidden_layer_size, 1 + input_layer_size)
+        Theta2: array (num_labels, 1 + hidden_layer_size)
+        X: array (m, input_layer_size)
+    Returns:
+        p_argmax: vector array (m,)
+    &quot;&quot;&quot;
+    # Get some useful values.
+    m = len(X)
+    num_labels = len(Theta2)
+    
+    # Initialize prediction p.
+    p = np.zeros((m, 1))
+    
+    #Insert a 1's column to X.
+    X = np.insert(X, 0, 1, axis=1)
+    a2 = sigmoid(np.dot(X, Theta1.T))
+    #Insert a 1's column to a2.
+    a2 = np.insert(a2, 0, 1, axis=1)
+    h_theta = sigmoid(np.dot(a2, Theta2.T))
+    p_argmax = np.argmax(h_theta, axis=1)
+    # Add 1 to fix for Python's zero indexed array.
+    p_argmax = p_argmax + 1
+    
+    return p_argmax
+
+# Create a function to output the accuracy score.
+def outputAccuracy(nn_params):
+    &quot;&quot;&quot;
+    Outputs the accuracy of the
+    trained neural network.
+    Args:
+        nn_params: vector array
+    &quot;&quot;&quot;
+    # After the training of the neural network, reshape
+    # nn_params back into the parameters Theta1 and Theta2,
+    # the weight matrices for our 2 layer neural network.
+    Theta1 = np.reshape(nn_params[:hidden_layer_size * (input_layer_size + 1)],
+                        (hidden_layer_size, input_layer_size + 1))
+    Theta2 = np.reshape(nn_params[hidden_layer_size * (input_layer_size + 1):],
+                        (num_labels, hidden_layer_size + 1))
+
+    predictions = predict(Theta1, Theta2, X)
+    print('\nTraining Set Accuracy: {0:.2f}%'.format(100 * np.mean(predictions == y.reshape(-1))))
+
+outputAccuracy(nn_params)
+</code></pre>
+
+<pre><code>Training Set Accuracy: 94.80%
+</code></pre>
+
+<h1 id="visualizing-the-hidden-layer">Visualizing the Hidden Layer</h1>
+
+<p>One way to understand what our neural network is learning is to visualize what the representations captured by the hidden units. Informally, given a particular hidden unit, one way to visualize what it computes is to find an input <code>$x$</code> that will cause it to activate (that is, to have an activation value <code>$(\alpha^{(l)})$</code> close to <code>$1$</code>). For the neural network we trained, notice that the <code>$i^{th}$</code> row of <code>$\Theta^{(1)}$</code> is a 401-dimensional vector that represents the parameter for the <code>$i^{th}$</code> hidden unit. If we discard the bias term, we get a 400-dimensional vector that represents the weights from each input pixel to the hidden unit.</p>
+
+<p>Thus, one way to visualize the “representation” captured by the hidden unit is to reshape this 400-dimensional vector into a <code>$20x20$</code> image and display it. This can be done by using the <code>displayData</code> function, which will show an image with 25 units, each corresponding to one hidden unit in the network.</p>
+
+<p>In the trained network, it can be found that the hidden units corresponds roughly to detectors that look for strokes and other patterns in the input.</p>
+
+<pre><code class="language-python">displayData(Theta1[:, 1:])
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/hidden_layer.png" alt="png" title="Hidden Layer" /></p>
+
+<h2 id="play">Play</h2>
+
+<p>We can try out different learning settings for the neural network to see how the performance of the neural network varies with the regularization parameter <code>$\lambda$</code> and number of training steps (the <code>MaxIter</code> option when using <code>minimize</code>).</p>
+
+<p>Neural networks are very powerful models that can form highly complex decision boundaries. Without regularization, it is possible for a neural network to “overfit” a training set so that it obtains close to <code>$100\%$</code> accuracy on the training set but does not as well on new examples that it has not seen before. The regularization <code>$\lambda$</code> can be set to a smaller value and the <code>MaxIter</code> parameter to a higher number of iterations to see this.</p>
+
+<p>The changes in the visualizations of the hidden units can also be depicted when the learning parameters <code>$\lambda$</code> and <code>MaxIter</code> are changed.</p>
+
+<pre><code class="language-python"># Create different cases of the learning parameters, lambda_coef and MaxIter.
+cases = {&quot;MaxIter = 10 and lambda_coef = 0.5&quot;: (10, 0.5),
+         &quot;MaxIter = 10 and lambda_coef = 100&quot;: (10, 100),
+         &quot;MaxIter = 10 and lambda_coef = 1000&quot;: (10, 1000),
+         &quot;MaxIter = 30 and lambda_coef = 1&quot;: (30, 1),
+         &quot;MaxIter = 200 and lambda_coef = 0&quot;: (200, 0)}
+
+for k, v in cases.items():
+    print(60 * &quot;-&quot;)
+    print()
+    print(k)
+    nn_params = optimizeCost(v[0], v[1])
+    outputAccuracy(nn_params)
+</code></pre>
+
+<pre><code>------------------------------------------------------------
+
+MaxIter = 10 and lambda_coef = 0.5
+Warning: Maximum number of iterations has been exceeded.
+         Current function value: 1.256776
+         Iterations: 10
+         Function evaluations: 21
+         Gradient evaluations: 21
+
+Training Set Accuracy: 82.74%
+------------------------------------------------------------
+
+MaxIter = 10 and lambda_coef = 100
+Warning: Maximum number of iterations has been exceeded.
+         Current function value: 2.702304
+         Iterations: 10
+         Function evaluations: 22
+         Gradient evaluations: 22
+
+Training Set Accuracy: 73.10%
+------------------------------------------------------------
+
+MaxIter = 10 and lambda_coef = 1000
+Warning: Maximum number of iterations has been exceeded.
+         Current function value: 3.292116
+         Iterations: 10
+         Function evaluations: 20
+         Gradient evaluations: 20
+
+Training Set Accuracy: 10.00%
+------------------------------------------------------------
+
+MaxIter = 30 and lambda_coef = 1
+Warning: Maximum number of iterations has been exceeded.
+         Current function value: 0.674454
+         Iterations: 30
+         Function evaluations: 63
+         Gradient evaluations: 63
+
+Training Set Accuracy: 92.90%
+------------------------------------------------------------
+
+MaxIter = 200 and lambda_coef = 0
+Warning: Maximum number of iterations has been exceeded.
+         Current function value: 0.007894
+         Iterations: 200
+         Function evaluations: 581
+         Gradient evaluations: 581
+
+Training Set Accuracy: 100.00%
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex3/">Multi-class Classification and Neural Networks</a></h4>
+    <h5>January 8, 2018</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex2/">Logistic Regression</a></h4>
+    <h5>December 24, 2017</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">pandas</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex1/">Linear Regression</a></h4>
+    <h5>December 19, 2017</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">pandas</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+ 
+
+    
+
+    
+
+        <h4 class="page-header">Comments</h4>
+
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "gtraskas" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+</main>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
