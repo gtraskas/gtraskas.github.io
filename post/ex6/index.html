@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Support Vector Machines</title>
+        <style>
+
+    html body {
+        font-family: 'Lato', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: #0099CC;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/R.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Markdown.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.31.1" />
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', '');
+        </script>
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Support Vector Machines</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/about/me">About</a></li>
+                            
+                                <li><a href="/project/">Projects</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:georgiost77@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/gtraskas/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/george-traskas/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex6/">Support Vector Machines</a></h4>
+    <h5>February 6, 2018</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<p>This post covers the first part of the sixth exercise from Andrew Ng&rsquo;s Machine Learning Course on Coursera.</p>
+
+<hr />
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Support vector machines (SVMs) will be used to build a spam classifier.</p>
+
+<h2 id="example-dataset-1">Example Dataset 1</h2>
+
+<p>Figure 1 depicts a 2D example dataset which can be separated by a linear boundary. In this dataset, the positions of the positive examples (indicated with <code>+</code>) and the negative examples (indicated with <code>o</code>) suggest a natural separation indicated by the gap. However, there is an outlier positive example <code>+</code> on the far left at about (0.1, 4.1), which can affect the SVM decision boundary.</p>
+
+<pre><code class="language-python">import numpy as np
+from scipy.io import loadmat
+import matplotlib.pyplot as plt
+import warnings
+warnings.filterwarnings('ignore')
+
+data1 = loadmat('ex6data1.mat')
+for k in data1:
+    print(k)
+</code></pre>
+
+<pre><code>__header__
+__version__
+__globals__
+X
+y
+</code></pre>
+
+<pre><code class="language-python">X = data1['X']
+y = data1['y']
+
+print(&quot;Shapes of X{} and y{}&quot;.format(X.shape, y.shape))
+
+# Create a function to plot the data.
+def plotData(X, y, title):
+    &quot;&quot;&quot;
+    Plots the data points with '+' for the positive examples
+    and 'o' for the negative examples.
+    Args:
+        X: array (m, 2)
+        y: array (m, 1)
+        title: str
+    &quot;&quot;&quot;
+    # Find indices of positive and negative examples.
+    y = y.flatten()
+    pos = y==1
+    neg = y==0
+
+    # Plot examples.
+    plt.title(title)
+    plt.plot(X[:,0][pos], X[:,1][pos], &quot;k+&quot;)
+    plt.plot(X[:,0][neg], X[:,1][neg], &quot;yo&quot;)
+    plt.show()
+
+plotData(X, y, &quot;Figure 1: Example Dataset 1&quot;)
+</code></pre>
+
+<pre><code>Shapes of X(51, 2) and y(51, 1)
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/Dataset_1.png" alt="Figure 1" title="Figure 1: Example Dataset 1" /></p>
+
+<p>Different values of the <code>$C$</code> parameter with SVMs will be tried. The <code>$C$</code> parameter is a positive value that controls the penalty for misclassified training examples. A large <code>$C$</code> parameter tells the SVM to try to classify all the examples correctly. <code>$C$</code> plays a role similar to <code>$\frac{1}{\lambda}$</code>, where <code>$\lambda$</code> is the regularization parameter that is used for logistic regression.</p>
+
+<p>When <code>$C=1$</code>, the SVM puts the decision boundary in the gap between the two datasets and misclassifies the data point on the far left (Figure 2). When <code>$C=100$</code>, the SVM classifies every single example correctly, but has a decision boundary that does not appear to be a natural fit for the data (Figure 3).</p>
+
+<ul>
+<li><strong>Note:</strong> Most SVM software packages automatically add the extra feature <code>$x_0=1$</code> and automatically take care of learning the intercept term <code>$\theta_0$</code>. The code should be working with training examples <code>$x\in\mathbb{R}^n$</code> (rather than <code>$x\in\mathbb{R}^{n+1}$</code>); for example, in the first example dataset <code>$x\in\mathbb{R}^2$</code>.</li>
+</ul>
+
+<h2 id="svm-with-gaussian-kernels">SVM with Gaussian Kernels</h2>
+
+<p>SVMs will be used to do non-linear classification with Gaussian kernels on datasets that are not linearly separable.</p>
+
+<h3 id="gaussian-kernel">Gaussian Kernel</h3>
+
+<p>To find non-linear decision boundaries with the SVM, first a Gaussian kernel should be implemented. The Gaussian kernel is a similarity function that measures the “distance” between a pair of examples, <code>$\left(x^{(i)},x^{(j)}\right)$</code>. The Gaussian kernel is also parameterized by a bandwidth parameter, <code>$\sigma$</code>, which determines how fast the similarity metric decreases (to <code>$0$</code>) as the examples are further apart.</p>
+
+<p>The code in <code>gaussianKernel</code> computes the Gaussian kernel between two examples, <code>$\left(x^{(i)},x^{(j)}\right)$</code>. The Gaussian kernel function is defined as:</p>
+
+<p><code>$$K_{gaussian}\left(x^{(i)},x^{(j)}\right) = exp\left(- \frac{\|x^{(i)}-x^{(j)}\|^2}{2\sigma^2}\right) = exp\left(- \frac{\sum_{k=1}^{n}\left(x_k^{(i)}-x_k^{(j)}\right)^2}{2\sigma^2}\right) $$</code></p>
+
+<pre><code class="language-python">from sklearn import svm 
+import numpy as np
+
+# Create a function that trains a SVM classifier.
+def svmTrain(X, y, C, kernelFunction, tol, max_passes, sigma=None):
+    &quot;&quot;&quot;
+    Trains a SVM classifier using &quot;svm&quot; from &quot;sklearn&quot;
+    and returns the trained model.
+    Args:
+        X: array (# training examples, # features)
+        Y: array (# training examples, 1),
+           contains 1 for positive examples 
+           and 0 for negative examples.
+        C: float, regularization parameter
+        kernelFunction: string, specifies the kernel type
+                        to be used in the algorithm. It must
+                        be one of 'linear', 'poly', 'rbf',
+                        'sigmoid', 'precomputed' or a callable.
+        tol: float, a tolerance value used for determining
+             equality of floating point numbers.
+        max_passes: int, controls the number of iterations
+                    over the dataset (without changes to alpha)
+                    before the algorithm quits.
+        sigma: float
+    Returns:
+        The classifier trained model
+    &quot;&quot;&quot;
+    # Change the shape of y to (# training examples, ),
+    # a 1d array is expected. 
+    y = y.flatten()
+    
+    if kernelFunction == 'gaussian':
+        clf = svm.SVC(C=C, kernel='precomputed', tol=tol, max_iter=max_passes)
+        return clf.fit(gaussianKernel(X, X, sigma=sigma), y)
+    else:
+        clf = svm.SVC(C=C, kernel=kernelFunction, tol=tol, max_iter=max_passes)
+        return clf.fit(X, y)
+
+# Create a funtion that computes the Gaussian kernel between two examples.
+def gaussianKernel(X1, X2, sigma):
+    &quot;&quot;&quot;
+    Returns a gaussian kernel between X1 and X2
+    and returns the similarity matrix in sim.
+    Define the kernel by either giving the kernel
+    as a python function or by precomputing the Gram
+    matrix.
+    Args:
+        X1: array
+        X2: array
+        sigma: float, the bandwidth parameter
+    Returns:
+        Gram: array
+    &quot;&quot;&quot;
+    Gram = np.zeros((X1.shape[0], X2.shape[0]))
+    for i, x1 in enumerate(X1):
+        for j, x2 in enumerate(X2):
+            x1 = x1.flatten()
+            x2 = x2.flatten()
+            Gram[i, j] = np.exp(-np.sum(np.square(x1 - x2)) / (2 * (sigma**2)))
+    return Gram
+
+
+# def gaussianKernel(x1, x2, sigma):
+#     &quot;&quot;&quot;
+#     Returns a gaussian kernel between x1 and x2
+#     and returns the similarity value in sim.
+#     Args:
+#         x1: vector 1d array
+#         x2: vector 1d array
+#         sigma: float, the bandwidth parameter
+#     Returns:
+#         sim: float
+#     &quot;&quot;&quot;
+#     # Ensure that x1 and x2 are column vectors
+#     x1 = x1.flatten()
+#     x2 = x2.flatten()
+    
+#     sim = np.exp(-np.sum(np.square(x1 - x2)) / (2 * (sigma**2)))
+#     return sim
+
+
+# Create a funtion that plots a linear decision boundary.
+def visualizeBoundaryLinear(X, y, model, title):
+    &quot;&quot;&quot;
+    Plots a linear decision boundary learned
+    by the SVM and overlays the data on it.
+    Args:
+        X: array (# training examples, # features)
+        y: array (# training examples, 1),
+           contains 1 for positive examples 
+           and 0 for negative examples.
+        model: the classifier trained model from 'svmTrain()'
+        title: str
+    &quot;&quot;&quot;
+    # Get the separating hyperplane.
+    w = model.coef_[0]
+    a = -w[0] / w[1]
+    # Only 2 points are required to define a line, e.g. min and max.
+    xx = np.array([X[:,0].min(), X[:,0].max()])
+    yy = a * xx - (model.intercept_[0]) / w[1]
+    # Plot the separating line.
+    plt.plot(xx, yy, 'b-')
+    # Plot the training data.
+    plotData(X, y, title)
+
+# Change the C value below and see how the decision boundary varies.
+C = 1
+model = svmTrain(X, y, C, 'linear', 1e-3, 500)
+visualizeBoundaryLinear(X, y, model, &quot;Figure 2: SVM Decision Boundary with C = 1&quot;)
+C = 100
+model = svmTrain(X, y, C, 'linear', 1e-3, 2000)
+visualizeBoundaryLinear(X, y, model, &quot;Figure 3: SVM Decision Boundary with C = 100&quot;)
+
+print(&quot;Evaluating the Gaussian Kernel ...&quot;)
+x1 = np.array([1, 2, 1])
+x2 = np.array([0, 4, -1])
+sigma = 2
+sim = gaussianKernel(x1, x2, sigma)
+print(&quot;Gaussian Kernel between x1= [1, 2, 1], x2= [0, 4, -1], sigma= 2: \n{}&quot;.format(sim))
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/SVM_Decision_Boundary_C_1.png" alt="Figure 2" title="Figure 2: SVM Decision Boundary with C = 1" /></p>
+
+<p><img src="/coursera_ml_andrew/SVM_Decision_Boundary_C_100.png" alt="Figure 3" title="Figure 3: SVM Decision Boundary with C = 100" /></p>
+
+<pre><code>Evaluating the Gaussian Kernel ...
+Gaussian Kernel between x1= [1, 2, 1], x2= [0, 4, -1], sigma= 2: 
+[[ 0.8824969   0.32465247  0.60653066]
+ [ 0.60653066  0.60653066  0.32465247]
+ [ 0.8824969   0.32465247  0.60653066]]
+</code></pre>
+
+<h3 id="example-dataset-2">Example Dataset 2</h3>
+
+<p>Figure 4 shows the dataset 2. From the figure, it can be observed that there is no linear decision boundary that separates the positive and negative examples for this dataset. However, by using the <code>Gaussian</code> kernel with the SVM, a non-linear decision boundary will be learnt, that can perform reasonably well for the dataset.</p>
+
+<pre><code class="language-python">data2 = loadmat('ex6data2.mat')
+
+X = data2['X']
+y = data2['y']
+
+print(&quot;Shapes of X{} and y{}&quot;.format(X.shape, y.shape))
+
+plotData(X, y, &quot;Figure 4: Example Dataset 2&quot;)
+</code></pre>
+
+<pre><code>Shapes of X(863, 2) and y(863, 1)
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/Dataset_2.png" alt="Figure 4" title="Figure 4: Example Dataset 2" /></p>
+
+<p>Figure 5 shows the decision boundary found by the SVM with a Gaussian kernel. The decision boundary is able to separate most of the positive and negative examples correctly and follows the contours of the dataset well.</p>
+
+<pre><code class="language-python"># Create a funtion that plots a non-linear decision boundary.
+def visualizeBoundary(X, y, model, title):
+    &quot;&quot;&quot;
+    Plots a non-linear decision boundary learned
+    by the SVM and overlays the data on it.
+    Args:
+        X: array (# training examples, # features)
+        y: array (# training examples, 1),
+           contains 1 for positive examples 
+           and 0 for negative examples.
+        model: the classifier trained model from 'svmTrain()'
+        title: str
+    &quot;&quot;&quot;
+    # Make classification predictions over a grid of values.
+    x1plot = np.linspace(X[:,0].min(), X[:,0].max(), 100).T
+    x2plot = np.linspace(X[:,1].min(), X[:,1].max(), 100).T
+    X1, X2 = np.meshgrid(x1plot, x2plot)
+    vals = np.zeros(X1.shape)
+    for i in range(X1.shape[1]):
+        this_X = np.column_stack((X1[:, i], X2[:, i]))
+        vals[:, i] = model.predict(gaussianKernel(this_X, X, sigma))
+
+    # Plot the SVM boundary
+    plt.contour(X1, X2, vals, colors=&quot;b&quot;, levels=[0,0])
+    # Plot the training data.
+    plotData(X, y, title)
+
+print(&quot;Training SVM with RBF Kernel (this may take 1 to 2 minutes)...&quot;)
+
+# Set SVM parameters.
+C = 1
+sigma = 0.1
+
+# We set the tolerance and max_passes lower here so that the code will run
+# faster. However, in practice, you will want to run the training to convergence.
+model = svmTrain(X, y, C, 'gaussian', 1e-3, 100, sigma)
+visualizeBoundary(X, y, model, &quot;Figure 5: SVM (Gaussian Kernel) Decision Boundary&quot;)
+</code></pre>
+
+<pre><code>Training SVM with RBF Kernel (this may take 1 to 2 minutes)...
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/SVM_Gaussian_DB.png" alt="Figure 5" title="Figure 5: SVM Gaussian Decision Boundary" /></p>
+
+<h3 id="example-dataset-3">Example Dataset 3</h3>
+
+<p>Figure 6 displays a third dataset. Again the SVM with the Gaussian kernel will be used with this dataset.</p>
+
+<p>In the provided dataset, ex6data3.mat, the variables <code>$X$</code>, <code>$y$</code>, <code>$Xval$</code>, <code>$yval$</code> are given. The SVM classifier is trained using the training set <code>$(X, y)$</code> using parameters loaded from <code>dataset3Params</code>.</p>
+
+<pre><code class="language-python">data3 = loadmat('ex6data3.mat')
+
+X = data3['X']
+y = data3['y']
+Xval = data3['Xval']
+yval = data3['yval']
+
+print(&quot;Shapes of X{} and y{}&quot;.format(X.shape, y.shape))
+
+plotData(X, y, &quot;Figure 6: Example Dataset 3&quot;)
+</code></pre>
+
+<pre><code>Shapes of X(211, 2) and y(211, 1)
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/Dataset_3.png" alt="Figure 6" title="Figure 6: Example Dataset 3" /></p>
+
+<p>Using the cross validation set <code>$Xval$</code>, <code>$yval$</code>, the best <code>$C$</code> and <code>$\sigma$</code> parameter to use will be determined. Additional necessary code helps to search over the parameters <code>$C$</code> and <code>$\sigma$</code>. For both <code>$C$</code> and <code>$\sigma$</code>, it is suggested trying values in multiplicative steps <code>$\left(e.g., 0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30\right)$</code>. Note that all possible pairs of values for <code>$C$</code> and <code>$\sigma$</code> should be tried <code>$\left(e.g., C = 0.3 \text{ and } \sigma = 0.1\right)$</code>. For example, for the 8 values of <code>$C$</code> and <code>$\sigma^2$</code> listed above, the training and evaluating (on the cross validation set) combinations of different models are <code>$8^2 = 64$</code>.</p>
+
+<p>After determining the best <code>$C$</code> and <code>$\sigma$</code> parameters, the code in <code>dataset3Params</code> is modified, filling in the best parameters that were found. For the best parameters, the SVM returns a decision boundary shown in Figure 7.</p>
+
+<ul>
+<li><strong>Tip:</strong> When implementing cross validation to select the best <code>$C$</code> and <code>$\sigma$</code> parameter to use, the error must be evaluated on the cross validation set. Recall that for classification, the error is defined as the fraction of the cross validation examples that were classified incorrectly. This error can be computed using <code>np.mean((predictions != yval).astype(int))</code>, where predictions is a vector containing all the predictions from the SVM, and <code>yval</code> are the true labels from the cross validation set.</li>
+</ul>
+
+<pre><code class="language-python"># Create a function to find the optimal parameters C and sigma.
+def dataset3Params(X, y, Xval, yval):
+    &quot;&quot;&quot;
+    Returns the choice of optimal C and sigma learning parameters -
+    based on a cross-validation set - to use for SVM with RBF kernel.
+    &quot;&quot;&quot;
+    predictions = dict()
+    for C in [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30]:
+        for sigma in [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30]:
+            # Train the model on X and y.
+            model = svmTrain(X, y, C, 'gaussian', 1e-5, 5000, sigma)
+            # Perform classification on samples in Xval.
+            # For precomputed kernels, the expected shape of
+            # X is [n_samples_validation, n_samples_train]
+            prediction = model.predict(gaussianKernel(Xval, X, sigma))
+            # Compute the prediction errors.
+            predictions[(C, sigma)] = np.mean((prediction != yval).astype(int))
+    C, sigma = min(predictions, key=predictions.get)
+    return C, sigma
+
+# Find the optimal C and sigma.
+C, sigma = dataset3Params(X, y, Xval, yval)
+
+# Train the SVM classifier with the optimal values of C and sigma.
+model = svmTrain(X, y, C, 'gaussian', 1e-5, 5000, sigma=sigma)
+
+# Plot the data and the decision boundary.
+visualizeBoundary(X, y, model, &quot;Figure 7: SVM (Gaussian Kernel) Decision Boundary&quot;)
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/SVM_Gaussian_DB_3.png" alt="Figure 7" title="Figure 7: SVM Gaussian Decision Boundary" /></p>
+</div>
+
+    
+    
+
+    
+
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex5/">Regularized Linear Regression and Bias v.s. Variance</a></h4>
+    <h5>January 24, 2018</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex4/">Neural Networks Learning</a></h4>
+    <h5>January 18, 2018</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex3/">Multi-class Classification and Neural Networks</a></h4>
+    <h5>January 8, 2018</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+ 
+
+    
+
+    
+
+        <h4 class="page-header">Comments</h4>
+
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "gtraskas" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+</main>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
