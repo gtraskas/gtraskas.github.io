@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Spam Classification</title>
+        <style>
+
+    html body {
+        font-family: 'Lato', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: #0099CC;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/R.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/Markdown.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.31.1" />
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', '');
+        </script>
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Spam Classification</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/about/me">About</a></li>
+                            
+                                <li><a href="/project/">Projects</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:georgiost77@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/gtraskas/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/george-traskas/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex6_spam/">Spam Classification</a></h4>
+    <h5>February 13, 2018</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">machine learning</kbd> 
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<p>This post covers the second part of the sixth exercise from Andrew Ng&rsquo;s Machine Learning Course on Coursera.</p>
+
+<hr />
+
+<h1 id="spam-classification">Spam Classification</h1>
+
+<p>Many email services today provide spam filters that are able to classify emails into spam and non-spam email with high accuracy. SVMs will be used to build a spam filter.</p>
+
+<p>A SVM classifier will be trained  to classify whether a given email, <code>$x$</code>, is spam <code>$\left(y = 1 \right)$</code> or non-spam <code>$\left(y = 0 \right)$</code>. In particular, each email should be converted into a feature vector <code>$x\in\mathbb{R}^n$</code>.</p>
+
+<p>The dataset is based on a subset of the SpamAssassin Public Corpus and only the body of the email will be used (excluding the email headers).</p>
+
+<h2 id="preprocessing-emails">Preprocessing Emails</h2>
+
+<p><strong>Sample Email:</strong></p>
+
+<p><code>Anyone knows how much it costs to host a web portal ? Well, it depends on how many visitors youre expecting. This can be anywhere from less than 10 bucks a month to a couple of $100. You should checkout http://www.rackspace.com/ or perhaps Amazon EC2 if youre running something big.. To unsubscribe yourself from this mailing list, send an email to: groupname-unsubscribe@egroups.com</code></p>
+
+<p>Before starting on a machine learning task, it is usually insightful to take a look at examples from the dataset. The sample email contains a URL, an email address (at the end), numbers, and dollar amounts. While many emails would contain similar types of entities (e.g., numbers, other URLs, or other email addresses), the specific entities (e.g., the specific URL or specific dollar amount) will be different in almost every email. Therefore, one method often employed in processing emails is to <strong>&ldquo;normalize&rdquo;</strong> these values, so that all URLs are treated the same, all numbers are treated the same, etc. For example, we could replace each URL in the email with the unique string &ldquo;httpaddr&rdquo; to indicate that a URL was present.</p>
+
+<p>This has the effect of letting the spam classifier make a classification decision based on whether any URL was present, rather than whether a specific URL was present. This typically improves the performance of a spam classifier, since spammers often randomize the URLs, and thus the odds of seeing any particular URL again in a new piece of spam is very small.</p>
+
+<p>In <code>processEmail</code>, the following email preprocessing and normalization steps have been implemented:</p>
+
+<ul>
+<li><strong>Lower-casing:</strong> The entire email is converted into lower case, so that captialization is ignored (e.g., IndIcaTE is treated the same as Indicate).</li>
+<li><strong>Stripping HTML:</strong> All HTML tags are removed from the emails. Many emails often come with HTML formatting; we remove all the HTML tags, so that only the content remains.</li>
+<li><strong>Normalizing URLs:</strong> All URLs are replaced with the text &ldquo;httpaddr&rdquo;.</li>
+<li><strong>Normalizing Email Addresses:</strong> All email addresses are replaced with the text &ldquo;emailaddr&rdquo;.</li>
+<li><strong>Normalizing Numbers:</strong> All numbers are replaced with the text &ldquo;number&rdquo;.</li>
+<li><strong>Normalizing Dollars:</strong> All dollar signs ($) are replaced with the text &ldquo;dollar&rdquo;.</li>
+<li><strong>Word Stemming:</strong> Words are reduced to their stemmed form. For example, &ldquo;discount&rdquo;, &ldquo;discounts&rdquo;, &ldquo;discounted&rdquo; and &ldquo;discounting&rdquo; are all replaced with &ldquo;discount&rdquo;. Sometimes, the Stemmer actually strips off additional characters from the end, so &ldquo;include&rdquo;, &ldquo;includes&rdquo;, &ldquo;included&rdquo;, and &ldquo;including&rdquo; are all replaced with &ldquo;includ&rdquo;.</li>
+<li><strong>Removal of non-words:</strong> Non-words and punctuation have been removed. All white spaces (tabs, newlines, spaces) have all been trimmed to a single space character.</li>
+</ul>
+
+<p>The result of these preprocessing steps looks like the following paragraph:</p>
+
+<p><code>anyon know how much it cost to host a web portal well it depend on how mani visitor your expect thi can be anywher from less than number buck a month to a coupl of dollarnumb you should checkout httpaddr or perhap amazon ecnumb if your run someth big to unsubscrib yourself from thi mail list send an email to emailaddr</code></p>
+
+<p>While preprocessing has left word fragments and non-words, this form turns out to be much easier to work with for performing feature extraction.</p>
+
+<h3 id="vocabulary-list">Vocabulary List</h3>
+
+<p>After preprocessing the emails, there is a list of words for each email. The next step is to choose which words will be used in the classifier and which will be left out.</p>
+
+<p>For simplicity reasons, only the most frequently occuring words as the set of words considered (the vocabulary list) have been chosen. Since words that occur rarely in the training set are only in a few emails, they might cause the model to overfit the training set. The complete vocabulary list is in the file <code>vocab.txt</code>. The vocabulary list was selected by choosing all words which occur at least a 100 times in the spam corpus, resulting in a list of 1899 words. In practice, a vocabulary list with about 10,000 to 50,000 words is often used.</p>
+
+<p>Given the vocabulary list, each word can be now mapped in the preprocessed emails into a list of word indices that contains the index of the word in the vocabulary list. For example, in the sample email, the word &ldquo;anyone&rdquo; was first normalized to &ldquo;anyon&rdquo; and then mapped onto the index 86 in the vocabulary list.</p>
+
+<p>The code in <code>processEmail</code> performs this mapping. In the code, a given string <code>str</code> which is a single word from the processed email is searched in the vocabulary list <code>vocabList</code>. If the word exists, the index of the word is added into the <code>word_indices</code> variable. If the word does not exist, and is therefore not in the vocabulary, the word can be skipped.</p>
+
+<pre><code class="language-python"># Read the txt file.
+with open('emailSample1.txt', 'r') as email:
+    file_contents = email.read()
+
+file_contents
+</code></pre>
+
+<pre><code>&quot;&gt; Anyone knows how much it costs to host a web portal ?\n&gt;\nWell, it depends on how many visitors you're expecting.\nThis can be anywhere from less than 10 bucks a month to a couple of $100. \nYou should checkout http://www.rackspace.com/ or perhaps Amazon EC2 \nif youre running something big..\n\nTo unsubscribe yourself from this mailing list, send an email to:\ngroupname-unsubscribe@egroups.com\n\n&quot;
+</code></pre>
+
+<pre><code class="language-python">import re
+from string import punctuation
+from nltk.stem.snowball import SnowballStemmer
+
+# Create a function to read the fixed vocab list.
+def getVocabList():
+    &quot;&quot;&quot;
+    Reads the fixed vocabulary list in vocab.txt
+    and returns a dictionary of the words in vocabList.
+    &quot;&quot;&quot;
+    # Read the fixed vocabulary list.
+    with open('vocab.txt', 'r') as vocab:
+        
+        # Store all dictionary words in dictionary vocabList.
+        vocabList = {}
+        for line in vocab.readlines():
+            i, word = line.split()
+            vocabList[word] = int(i)
+
+    return vocabList
+
+# Create a function to process the email contents.
+def processEmail(email_contents):
+    &quot;&quot;&quot;
+    Preprocesses the body of an email and returns a
+    list of indices of the words contained in the email.
+    Args:
+        email_contents: str
+    Returns:
+        word_indices: list of ints
+    &quot;&quot;&quot;
+    # Load Vocabulary.
+    vocabList = getVocabList()
+
+    # Init return value.
+    word_indices = []
+    
+    # ============================ Preprocess Email ============================
+
+    # Find the Headers ( \n\n and remove ).
+    # Uncomment the following lines if you are working with raw emails with the
+    # full headers.
+
+    # hdrstart = email_contents.find(&quot;\n\n&quot;)
+    # if hdrstart:
+    #     email_contents = email_contents[hdrstart:]
+
+    # Convert to lower case.
+    email_contents = email_contents.lower()
+
+    # Strip all HTML.
+    # Look for any expression that starts with &lt; and ends with &gt; and
+    # does not have any &lt; or &gt; in the tag and replace it with a space.
+    email_contents = re.sub('&lt;[^&lt;&gt;]+&gt;', ' ', email_contents)
+
+    # Handle Numbers.
+    # Look for one or more characters between 0-9.
+    email_contents = re.sub('[0-9]+', 'number', email_contents)
+
+    # Handle URLS.
+    # Look for strings starting with http:// or https://.
+    email_contents = re.sub('(http|https)://[^\s]*', 'httpaddr', email_contents)
+
+    # Handle Email Addresses.
+    # Look for strings with @ in the middle.
+    email_contents = re.sub('[^\s]+@[^\s]+', 'emailaddr', email_contents)
+
+    # Handle $ sign.
+    # Look for &quot;$&quot; and replace it with the text &quot;dollar&quot;.
+    email_contents = re.sub('[$]+', 'dollar', email_contents)
+
+
+    # ============================ Tokenize Email ============================
+
+    # Output the email to screen as well.
+    print('\n==== Processed Email ====\n')
+
+    # Process file
+    l = 0
+    
+    # Get rid of any punctuation.
+    email_contents = email_contents.translate(str.maketrans('', '', punctuation))
+
+    # Split the email text string into individual words.
+    email_contents = email_contents.split()
+
+    for token in email_contents:
+
+        # Remove any non alphanumeric characters.
+        token = re.sub('[^a-zA-Z0-9]', '', token)
+        
+        # Create the stemmer.
+        stemmer = SnowballStemmer(&quot;english&quot;)
+        
+        # Stem the word.
+        token = stemmer.stem(token.strip())
+
+        # Skip the word if it is too short
+        if len(token) &lt; 1:
+           continue
+        
+        # Look up the word in the dictionary and add to word_indices if found.
+        if token in vocabList:
+            idx = vocabList[token]
+            word_indices.append(idx)
+
+        # ====================================================================
+
+        # Print to screen, ensuring that the output lines are not too long.
+        if l + len(token) + 1 &gt; 78:
+            print()
+            l = 0
+        print(token, end=' ')
+        l = l + len(token) + 1
+
+    # Print footer.
+    print('\n\n=========================\n')
+
+    return word_indices
+
+
+# Extract features.
+word_indices = processEmail(file_contents)
+
+# Print stats.
+print('Word Indices: \n')
+print(word_indices)
+print('\n\n')
+</code></pre>
+
+<pre><code>==== Processed Email ====
+
+anyon know how much it cost to host a web portal well it depend on how mani 
+visitor your expect this can be anywher from less than number buck a month to 
+a coupl of dollarnumb you should checkout httpaddr or perhap amazon ecnumb if 
+your run someth big to unsubscrib yourself from this mail list send an email 
+to emailaddr 
+
+=========================
+
+Word Indices: 
+
+[86, 916, 794, 1077, 883, 370, 1699, 790, 1822, 1831, 883, 431, 1171, 794, 1002, 1895, 592, 238, 162, 89, 688, 945, 1663, 1120, 1062, 1699, 375, 1162, 479, 1893, 1510, 799, 1182, 1237, 810, 1895, 1440, 1547, 181, 1699, 1758, 1896, 688, 992, 961, 1477, 71, 530, 1699, 531]
+</code></pre>
+
+<h2 id="extracting-features-from-emails">Extracting Features from Emails</h2>
+
+<p>The feature extraction that converts each email into a vector in <code>$\mathbb{R}^n$</code> should be implemented. For this, <code>$n = \text{# words in vocabulary list}$</code> will be used. Specifically, the feature <code>$x_i\in {\{0, 1\}}$</code> for an email corresponds to whether the i-th word in the dictionary occurs in the email. That is, <code>$x_i = 1$</code> if the i-th word is in the email and <code>$x_i = 0$</code> if the i-th word is not present in the email.</p>
+
+<p>Thus, for a typical email, this feature would look like:</p>
+
+<p><code>$$x=\begin{bmatrix}
+0 \\
+\vdots\\
+1\\
+0\\
+\vdots\\
+1\\
+0\\
+\vdots\\
+0\end{bmatrix} \in \mathbb{R}^n$$</code></p>
+
+<p>The code in emailFeatures generates a feature vector for an email, given the word indices. Running the code on the email sample, the feature vector will have length 1899 and 43 non-zero entries.</p>
+
+<pre><code class="language-python">import numpy as np
+
+# Create a function to produce a feature vector from the word indices.
+def emailFeatures(word_indices):
+    &quot;&quot;&quot;
+    Takes in a word_indices vector and produces
+    a feature vector from the word indices.
+    Args:
+        word_indices: list of ints
+    Returns:
+        x: binary feature vector array (n, 1)
+    &quot;&quot;&quot;
+    # Total number of words in the dictionary.
+    n = 1899
+
+    # Init return value.
+    x = np.zeros((n, 1))
+
+    # Iterate over idx items in word_indices.
+    for idx in word_indices:
+        # Assign 1 to index idx in x.
+        x[idx] = 1
+
+    return x
+
+# Convert each email into a vector of features in R^n.
+print('Extracting features from sample email (emailSample1.txt)...\n')
+
+# Extract features.
+features = emailFeatures(word_indices)
+
+# Print stats.
+print('Length of feature vector: {:d}'.format(len(features)))
+print('Number of non-zero entries: {:d}'.format(np.sum(features &gt; 0)))
+</code></pre>
+
+<pre><code>Extracting features from sample email (emailSample1.txt)...
+
+Length of feature vector: 1899
+Number of non-zero entries: 43
+</code></pre>
+
+<h2 id="training-svm-for-spam-classification">Training SVM for Spam Classification</h2>
+
+<p>Next a preprocessed training dataset will be loaded and it will be used to train a SVM classifier. <code>spamTrain.mat</code> contains 4000 training examples of spam and non-spam email, while <code>spamTest.mat</code> contains 1000 test examples. Each original email was processed using the <code>processEmail</code> and <code>emailFeatures</code> functions and converted into a vector <code>$x^{(i)}\in\mathbb{R}^{1899}$</code>.</p>
+
+<p>After loading the dataset, a SVM will be trained to classify between spam <code>$\left(y = 1\right)$</code> and non-spam <code>$\left(y = 0\right)$</code> emails. Once the training completes, the classifier gets a training accuracy of about <code>$99.8\%$</code> and a test accuracy of about <code>$98.9\%$</code>.</p>
+
+<pre><code class="language-python">from sklearn import svm
+from scipy.io import loadmat
+
+# Load the Spam Email dataset.
+email_train = loadmat('spamTrain.mat')
+X = email_train[&quot;X&quot;]
+y = email_train[&quot;y&quot;]
+
+print('Training Linear SVM (Spam Classification)...')
+print('(this may take 1 to 2 minutes) ...')
+
+C = 0.1
+y = y.ravel()
+svc = svm.SVC(C, 'linear')
+svc.fit(X, y)
+p = svc.predict(X)
+
+print('Training Accuracy: {0:.2f}%'.format(np.mean((p == y).astype(int)) * 100))
+
+# Load the test dataset.
+email_test = loadmat('spamTest.mat')
+Xtest = email_test[&quot;Xtest&quot;]
+ytest = email_test[&quot;ytest&quot;]
+
+print('Evaluating the trained Linear SVM on a test set ...')
+
+ytest = ytest.ravel()
+p = svc.predict(Xtest)
+
+print('Test Accuracy: {0:.2f}%'.format(np.mean((p == ytest).astype(int)) * 100))
+</code></pre>
+
+<pre><code>Training Linear SVM (Spam Classification)...
+(this may take 1 to 2 minutes) ...
+Training Accuracy: 99.83%
+Evaluating the trained Linear SVM on a test set ...
+Test Accuracy: 98.90%
+</code></pre>
+
+<h2 id="top-predictors-for-spam">Top Predictors for Spam</h2>
+
+<p>To better understand how the spam classifier works, we can inspect the parameters to see which words the classifier thinks are the most predictive of spam. Next, the parameters with the largest positive values in the classifier will be found and the corresponding words will be displayed.</p>
+
+<pre><code class="language-python"># Get the weights.
+weights = svc.coef_[0]
+
+# Get the 15 indices that sort the most important weights.
+indices = weights.argsort()[-15:]
+
+# Reverse argsorting in descending order.
+indices = (-weights).argsort()[:15]
+
+# Return a sorted list from the dictionary.
+vocabList = sorted(getVocabList())
+
+print('Top predictors of spam: \n');
+for i in indices: 
+    print( '{0:10s} ({1:8f})'.format(vocabList[i], float(weights[i])))
+</code></pre>
+
+<pre><code>Top predictors of spam: 
+
+our        (0.500614)
+click      (0.465916)
+remov      (0.422869)
+guarante   (0.383622)
+visit      (0.367710)
+basenumb   (0.345064)
+dollar     (0.323632)
+will       (0.269724)
+price      (0.267298)
+pleas      (0.261169)
+most       (0.257298)
+nbsp       (0.253941)
+lo         (0.253467)
+ga         (0.248297)
+hour       (0.246404)
+</code></pre>
+
+<p>Thus, if an email contains words such as “guarantee”, “remove”, “dollar”, and “price”, it is likely to be classified as spam.</p>
+</div>
+
+    
+    
+
+    
+
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex6/">Support Vector Machines</a></h4>
+    <h5>February 6, 2018</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex5/">Regularized Linear Regression and Bias v.s. Variance</a></h4>
+    <h5>January 24, 2018</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ex4/">Neural Networks Learning</a></h4>
+    <h5>January 18, 2018</h5>
+     <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
+
+</div>
+ 
+
+    
+
+    
+
+        <h4 class="page-header">Comments</h4>
+
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "gtraskas" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+</main>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
