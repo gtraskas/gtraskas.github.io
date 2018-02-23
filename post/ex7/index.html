@@ -135,7 +135,7 @@
     
 
     <h4><a href="/post/ex7/">K-means Clustering and Principal Component Analysis</a></h4>
-    <h5>February 21, 2018</h5>
+    <h5>February 23, 2018</h5>
      <kbd class="item-tag">Python</kbd>  <kbd class="item-tag">machine learning</kbd>  <kbd class="item-tag">matplotlib</kbd> 
 
 </div>
@@ -169,7 +169,7 @@ MathJax.Hub.Config({
 });
 </script>
 
-<p>This post covers the first part of the seventh exercise from Andrew Ng&rsquo;s Machine Learning Course on Coursera.</p>
+<p>This post covers the seventh exercise from Andrew Ng&rsquo;s Machine Learning Course on Coursera.</p>
 
 <hr />
 
@@ -205,7 +205,6 @@ MathJax.Hub.Config({
 <pre><code class="language-python">import numpy as np
 from scipy.io import loadmat
 import matplotlib.pyplot as plt
-import math
 
 # Load dataset.
 data = loadmat('ex7data2.mat')
@@ -222,8 +221,8 @@ def findClosestCentroids(X, centroids):
     where each row is a single example. idx = m x 1 vector
     of centroid assignments (i.e. each entry in range [1..K])
     Args:
-        X        : array(# training examples, 2)
-        centroids: array(K, 2)
+        X        : array(# training examples, n)
+        centroids: array(K, n)
     Returns:
         idx      : array(# training examples, 1)
     &quot;&quot;&quot;
@@ -382,9 +381,9 @@ def plotProgresskMeans(X, centroids, previous, idx, K, i):
     With the previous centroids, it also plots a line between the
     previous locations and current locations of the centroids.
     Args:
-        X        : array(# training examples, 2)
-        centroids: array(# of centroids, 2)
-        previous : array(# of centroids, 2)
+        X        : array(# training examples, n)
+        centroids: array(# of centroids, n)
+        previous : array(# of centroids, n)
         idx      : array(# training examples, 1)
         K        : int, # of centroids
         i        : # of iterations
@@ -393,7 +392,8 @@ def plotProgresskMeans(X, centroids, previous, idx, K, i):
     plotDataPoints(X, idx, K)
 
     # Plot the centroids as black x's.
-    plt.scatter(centroids[:,0], centroids[:,1], marker='x', c='k', s=100, linewidth=1)
+    plt.scatter(centroids[:,0], centroids[:,1],
+                marker='x', c='k', s=100, linewidth=1)
 
     # Plot the history of the centroids with lines.
     for j in range(centroids.shape[0]):
@@ -414,12 +414,12 @@ def runkMeans(X, initial_centroids, max_iters, plot_progress):
     centroids, a K x n matrix of the computed centroids and idx, a m x 1 
     vector of centroid assignments (i.e. each entry in range [1..K])
     Args:
-        X                : array(# training examples, 2)
-        initial_centroids: array(# of centroids, 2)
+        X                : array(# training examples, n)
+        initial_centroids: array(# of centroids, n)
         max_iters        : int, # of iterations
         plot_progress    : boolean, default set to False
     Returns:
-        centroids        : array(# of centroids, 2)
+        centroids        : array(# of centroids, n)
         idx              : array(# training examples, 1)
     &quot;&quot;&quot;
     # Initialize values.
@@ -477,7 +477,7 @@ K-Means iteration 9/10...
 K-Means Done.
 </code></pre>
 
-<p><img src="/coursera_ml_andrew/K-means 1.png" alt="Figure 1" title="Figure 1: Progress of K-Means" /></p>
+<p><img src="/coursera_ml_andrew/K-means 1.png" alt="Figure 1" title="Figure 1: Progress of the K-means algorithm." /></p>
 
 <h2 id="random-initialization">Random Initialization</h2>
 
@@ -489,10 +489,10 @@ def kMeansInitCentroids(X, K):
     Initializes K centroids that are to be 
     used in K-Means on the dataset X.
     Args:
-        X                : array(# training examples, 2)
+        X                : array(# training examples, n)
         K                : int, # of centroids
     Returns:
-        initial_centroids: array(# of centroids, 2)
+        initial_centroids: array(# of centroids, n)
     &quot;&quot;&quot;
     # Init centroids.
     centroids = np.zeros((K, X.shape[1]))
@@ -529,7 +529,7 @@ K-Means iteration 9/10...
 K-Means Done.
 </code></pre>
 
-<p><img src="/coursera_ml_andrew/K-means 2.png" alt="Figure 2" title="Figure 2: Progress of K-Means with random initial centroids" /></p>
+<p><img src="/coursera_ml_andrew/K-means 2.png" alt="Figure 2" title="Figure 2: Progress of the K-means algorithm with random initial centroids." /></p>
 
 <h2 id="image-compression-with-k-means">Image Compression with K-means</h2>
 
@@ -563,8 +563,8 @@ img_size = A.shape
 
 # Reshape the image into an Nx3 matrix where N = number of pixels.
 # Each row will contain the Red, Green and Blue pixel values
-# This gives the dataset matrix X that will be used K-Means on.
-X = A.reshape(img_size[0] * img_size[1], 3)
+# This gives the dataset matrix X_img that will be used K-Means on.
+X_img = A.reshape(img_size[0] * img_size[1], 3)
 
 # Run K-Means algorithm on this data.
 # Different values of K and max_iters can be tried here.
@@ -572,10 +572,10 @@ K = 16
 max_iters = 10
 
 # When using K-Means, it is important the initialize the centroids randomly. 
-initial_centroids = kMeansInitCentroids(X, K)
+initial_centroids = kMeansInitCentroids(X_img, K)
 
 # Run K-Means.
-centroids, idx = runkMeans(X, initial_centroids, max_iters, plot_progress=True)
+centroids, idx = runkMeans(X_img, initial_centroids, max_iters, plot_progress=True)
 </code></pre>
 
 <pre><code>Running K-Means clustering on pixels from an image.
@@ -591,12 +591,12 @@ K-Means iteration 8/10...
 K-Means iteration 9/10...
 </code></pre>
 
-<p><img src="/coursera_ml_andrew/K-means 3.png" alt="Figure 3" title="Figure 3: Progress of K-Means on pixels of an image" /></p>
+<p><img src="/coursera_ml_andrew/K-means 3.png" alt="Figure 3" title="Figure 3: Progress of the K-means on pixels." /></p>
 
 <pre><code class="language-python">print('Applying K-Means to compress an image.')
 
 # Find closest cluster members.
-idx = findClosestCentroids(X, centroids)
+idx = findClosestCentroids(X_img, centroids)
 
 # Essentially, now the image X is represented as in terms of the indices in idx.
 # The image can be recoverd from the indices (idx) by mapping each pixel
@@ -621,7 +621,387 @@ plt.show()
 <pre><code>Applying K-Means to compress an image.
 </code></pre>
 
-<p><img src="/coursera_ml_andrew/K-means 4.png" alt="Figure 4" title="Original and reconstructed image" /></p>
+<p><img src="/coursera_ml_andrew/K-means 4.png" alt="Figure 4" title="Figure 4: Original vs. compressed image." /></p>
+
+<h1 id="principal-component-analysis">Principal Component Analysis</h1>
+
+<p>In this part, Principal Component Analysis (PCA) will be applied to perform dimensionality reduction. First an example <code>$2D$</code> dataset will be tested to get intuition on how PCA works, and a bigger dataset of 5000 face images will be used.</p>
+
+<h2 id="example-dataset">Example Dataset</h2>
+
+<p>To understand how PCA works, a <code>$2D$</code> dataset which has one direction of large variation and one of smaller variation will be tested. First, the training data will be plotted (Figure 1). Visualize will help to understand what happens when PCA is applied to reduce the data from <code>$2D$</code> to <code>$1D$</code>. In practice, data may even be reduced for example from 256 to 50 dimensions, but using lower dimensional data in this example allows to visualize the algorithms better.</p>
+
+<pre><code class="language-python">import numpy as np
+from scipy.io import loadmat
+import matplotlib.pyplot as plt
+
+# Load dataset.
+data = loadmat('ex7data1.mat')
+X = data[&quot;X&quot;]
+
+plt.figure(figsize=(6, 6))
+plt.scatter(X[:,0], X[:,1], edgecolors='b', facecolors='none')
+plt.title(&quot;Figure 1: Example Dataset 1&quot;)
+plt.show()
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/PCA 1.png" alt="Figure 5" title="Figure 5: Example dataset 1." /></p>
+
+<h2 id="implementing-pca">Implementing PCA</h2>
+
+<p>PCA consists of two computational steps: First, the covariance matrix of the data is computed, which is given by:</p>
+
+<p><code>$$ \Sigma = \frac{1}{m} X^T X$$</code></p>
+
+<p>where <code>$X$</code> is the data matrix with examples in rows, and <code>$m$</code> is the number of examples. <strong>Note</strong> that <code>$\Sigma$</code> is a <code>$n \times n$</code> matrix and not the summation operator.</p>
+
+<p>Then, the eigenvectors <code>$U_1, U_2,\dots, U_n$</code> are computed. These will correspond to the principal components of variation in the data.</p>
+
+<p>Before using PCA, it is important to first <strong>normalize</strong> the data by subtracting the mean value of each feature from the dataset, and scaling each dimension so that they are in the same range. After normalizing the data, PCA is run to compute the principal components.</p>
+
+<p>The corresponding principal components found are shown in Figure 2. Also the top principal component (eigenvector) found are printed (an output of about (-0.707 -0.707) is expected).</p>
+
+<pre><code class="language-python">import scipy.linalg as linalg
+
+# Create a function to normalize features.
+def featureNormalize(X):
+    &quot;&quot;&quot;
+    Returns a normalized version of X where the mean
+    value of each feature is 0 and the standard deviation
+    is 1. This is often a good preprocessing step to do
+    when working with learning algorithms.
+    Args:
+        X     : array(# of training examples, n)
+    Returns:
+        X_norm: array(# of training examples, n)
+        mu    : array(n,)
+        sigma : array(n,)
+    &quot;&quot;&quot;
+    mu = np.mean(X, axis=0)
+    X_norm = X - mu
+    # Set Delta Degrees of Freedom (ddof) to 1, to compute
+    # the std based on a sample and not the population.
+    sigma = np.std(X_norm, axis=0, ddof=1)
+    X_norm = X_norm / sigma
+    
+    return X_norm, mu, sigma
+
+# Create a function to compute the eigenvectors and eigenvalues.
+def pca(X):
+    &quot;&quot;&quot;
+    Returns the eigenvectors U, the eigenvalues (on diagonal) in S.
+    Args:
+        X: array(# of training examples, n)
+    Returns:
+        U: array(n, n)
+        S: array(n, n)
+    &quot;&quot;&quot;
+    # Get some useful values
+    m, n = X.shape
+    
+    # Init U and S.
+    U = np.zeros(n)
+    S = np.zeros(n)
+    
+    # When computing the covariance matrix, we have
+    # to divide by m (the number of examples).
+    sigma = (1. / m) * np.dot(X.T, X)
+    
+    # Compute the eigenvectors and eigenvalues
+    # of the covariance matrix.
+    U, S, V = linalg.svd(sigma)
+    S = linalg.diagsvd(S, len(S), len(S))
+
+    return U, S
+
+# Normalize X.
+X_norm, mu, _ = featureNormalize(X)
+
+# Run PCA.
+U, S = pca(X_norm)
+
+# Draw the eigenvectors centered at mean of data. These lines show the
+# directions of maximum variations in the dataset.
+plt.figure(figsize=(6, 6))
+plt.scatter(X[:,0], X[:,1], edgecolors='b', facecolors='none')
+plt.title(&quot;Figure 2: Computed eigenvectors of the dataset.&quot;)
+# Compute the pairs of points to draw the lines.
+p1 = mu
+p2 = mu + 1.5 * S[0,0] * U[:,0].T
+p3 = mu + 1.5 * S[1,1] * U[:,1].T
+plt.plot([p1[0], p2[0]], [p1[1], p2[1]], c='k', linewidth=2)
+plt.plot([p1[0], p3[0]], [p1[1], p3[1]], c='k', linewidth=2)
+plt.show()
+
+print('Top eigenvector:')
+print('U[:,0]= {:f} {:f}'.format(U[0,0], U[1,0]))
+print('(expected to see -0.707107 -0.707107)')
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/PCA 2.png" alt="Figure 6" title="Figure 6: Computed eigenvectors of the dataset." /></p>
+
+<pre><code>Top eigenvector:
+U[:,0]= -0.707107 -0.707107
+(expected to see -0.707107 -0.707107)
+</code></pre>
+
+<h2 id="dimensionality-reduction-with-pca">Dimensionality Reduction with PCA</h2>
+
+<p>The principal component can be used now to reduce the feature dimension of the dataset by projecting each example onto a lower dimensional space, <code>$x^{(i)} \rightarrow z^{(i)}$</code> (e.g., projecting the data from <code>$2D$</code> to <code>$1D$</code>). In practice, if a learning algorithm such as linear regression or perhaps neural networks is applied, the projected data can be used instead of the original data. By using the projected data, the model is trained faster as there are less dimensions in the input.</p>
+
+<h3 id="projecting-the-data-onto-the-principal-components">Projecting the Data onto the Principal Components</h3>
+
+<p>The code in <code>projectData</code> uses a dataset <code>$X$</code>, the principal components <code>$U$</code>, and the desired number of dimensions to reduce to <code>$K$</code>. Each example in <code>$X$</code> is projected onto the top <code>$K$</code> components in <code>$U$</code>. Note that the top <code>$K$</code> components in <code>$U$</code> are given by the first <code>$K$</code> columns of <code>$U$</code>, that is <code>U_reduce = U(:,:K)</code>.</p>
+
+<h3 id="reconstructing-an-approximation-of-the-data">Reconstructing an Approximation of the Data</h3>
+
+<p>After projecting the data onto the lower dimensional space, data can be approximately recovered by projecting them back onto the original high dimensional space. The code in <code>recoverData</code> projects each example in <code>$Z$</code> back onto the original space and return the recovered approximation in <code>X_rec</code>.</p>
+
+<h3 id="visualizing-the-projections">Visualizing the Projections</h3>
+
+<p>In Figure 3, the original data points are indicated with the blue circles, while the projected data points are indicated with the red circles. The projection effectively only retains the information in the direction given by <code>$U_1$</code>.</p>
+
+<pre><code class="language-python"># Create a function to project the data.
+def projectData(X, U, K):
+    &quot;&quot;&quot;
+    Computes the projection of the normalized inputs X
+    into the reduced dimensional space spanned by the first
+    K columns of U. It returns the projected examples in Z.
+    Args:
+        X: array(# of training examples, n)
+        U: array(n, n)
+        K: int, # of dimensions
+    Returns:
+        Z: array(# of training examples, K)
+    &quot;&quot;&quot;
+    # Init Z.
+    Z = np.zeros((X.shape[0], K)) # m * K
+    
+    # Compute the projection of the data using only
+    # the top K eigenvectors in U (first K columns).
+    U_reduce = U[:,:K]
+    Z = np.dot(X, U_reduce)
+
+    return Z
+
+# Create a function to recover the data.
+def recoverData(Z, U, K):
+    &quot;&quot;&quot;
+    Recovers an approximation the original data
+    that has been reduced to K dimensions.
+    It returns the approximate reconstruction in X_rec.
+    Args:
+        Z    : array(# of training examples, K)
+        U    : array(n, n)
+        K    : int, # of dimensions
+    Returns:
+        X_rec: array(# of training examples, n)
+    &quot;&quot;&quot;
+    # Init X_rec.
+    X_rec = np.zeros((Z.shape[0], U.shape[0]))
+    
+    # Compute the approximation of the data by projecting back
+    # onto the original space using the top K eigenvectors in U.
+    U_reduce = U[:,: K]
+    X_rec = np.dot(Z, U_reduce.T)
+
+    return X_rec
+
+# Project the data onto K = 1 dimension.
+K = 1
+Z = projectData(X_norm, U, K)
+print('Projection of 1st example: %.6f'% Z[0])
+print('(this value should be about 1.481274)')
+
+X_rec = recoverData(Z, U, K)
+print('\nApproximation of 1st example: {0:.6f} {0:.6f}'.format(X_rec[0,0], X_rec[0,1]))
+print('(this value should be about  -1.047419 -1.047419)')
+
+# Draw the normalized X dataset.
+plt.figure(figsize=(6, 6))
+plt.scatter(X_norm[:,0], X_norm[:,1], edgecolors='b', facecolors='none')
+plt.title(&quot;Figure 3: The normalized and projected data after PCA.&quot;)
+# Draw the projected points.
+plt.scatter(X_rec[:,0], X_rec[:,1], edgecolors='r', facecolors='none')
+# Draw lines connecting the projected points to the original points.
+for i in range(X_norm.shape[0]):
+    plt.plot([X_norm[i,:][0], X_rec[i,:][0]],
+             [X_norm[i,:][1], X_rec[i,:][1]],
+             linestyle='--', color='k', linewidth=1)
+plt.show()
+</code></pre>
+
+<pre><code>Projection of 1st example: 1.481274
+(this value should be about 1.481274)
+
+Approximation of 1st example: -1.047419 -1.047419
+(this value should be about  -1.047419 -1.047419)
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/PCA 3.png" alt="Figure 7" title="Figure 7: The normalized and projected data after PCA." /></p>
+
+<h2 id="face-image-dataset">Face Image Dataset</h2>
+
+<p>PCA will applied on face images to see how it can be used in practice for dimension reduction. The dataset <code>ex7faces.mat</code> contains a dataset <code>$X$</code> of face images, each <code>$32 \times 32$</code> in grayscale. Each row of <code>$X$</code> corresponds to one face image (a row vector of length 1024). Next figure shows the first 100 of these face images.</p>
+
+<pre><code class="language-python"># Load faces dataset.
+data = loadmat('ex7faces.mat')
+X = data[&quot;X&quot;]
+
+print(&quot;Shape of X: &quot;, X.shape)
+
+def displayData(X, n):
+    &quot;&quot;&quot;
+    Select the first n rows from X,
+    plot them as (length of image vector x length of image vector)
+    pixel grayscale images, and combine them to one figure.
+    Args:
+        X: array(# of training examples, length of image vector)
+        n: int
+    &quot;&quot;&quot;
+    # Create nxn subplots and remove the gaps
+    # between the subplots with gridspec.
+    fig, axarr = plt.subplots(n, n,
+                             figsize=(6, 6),
+                             gridspec_kw={'wspace':0,
+                                          'hspace':0})
+    idx = 0
+    for i in range(n):
+        for j in range(n):            
+            # Index the array X with the indices.
+            pixels = X[idx] # shape(1, length of image vector)
+            pixels = pixels.reshape(-1, 32) # shape(32, 32)
+            axarr[i,j].imshow(pixels.T, cmap='gray')
+            # Remove ticks.
+            axarr[i,j].set_xticks([])
+            axarr[i,j].set_yticks([])
+            # Turn off axes.
+            axarr[i,j].axis('off')
+            idx += 1
+    plt.show()
+
+displayData(X, 10)
+</code></pre>
+
+<pre><code>Shape of X:  (5000, 1024)
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/PCA 4.png" alt="Figure 8" title="Figure 8: Sample of face images dataset." /></p>
+
+<h3 id="pca-on-faces">PCA on Faces</h3>
+
+<p>To run PCA on the face dataset, first the dataset is normalized by subtracting the mean of each feature from the data matrix <code>$X$</code>. After running PCA, the principal components of the dataset are obtained. Notice that each principal component in <code>$U$</code> (each row) is a vector of length <code>$n$</code> (where for the face dataset, <code>$n = 1024$</code>). It turns out that these principal components can be visualized by reshaping each of them into a <code>$32 \times 32$</code> matrix that corresponds to the pixels in the original dataset. Next the first 36 principal components that describe the largest variations are displayed.</p>
+
+<pre><code class="language-python">print('Running PCA on face dataset...')
+
+# Before running PCA, it is important to first normalize X
+# by subtracting the mean value from each feature.
+X_norm, _, _ = featureNormalize(X)
+
+# Run PCA.
+U, S = pca(X_norm)
+
+# Visualize the top 36 eigenvectors found.
+displayData(U.T, 6)
+</code></pre>
+
+<pre><code>Running PCA on face dataset...
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/PCA 5.png" alt="Figure 9" title="Figure 9: PCA on face images." /></p>
+
+<h3 id="dimensionality-reduction">Dimensionality Reduction</h3>
+
+<p>Now principal components can be used to reduce the dimension of the face dataset. This allows to use the learning algorithm with a smaller input size (e.g., 100 dimensions) instead of the original 1024 dimensions. This can help speed up the learning algorithm.</p>
+
+<p>Next the face dataset will be projected onto only the first 100 principal components. Concretely, each face image is now described by a vector <code>$z^{(i)} \in \mathbb{R}^{100}$</code>.</p>
+
+<p>To understand what is lost in the dimension reduction, the data can be recovered using only the projected dataset. An approximate recovery of the data is performed and the original and projected face images are displayed in the next figure. From the reconstruction, it can be observed that the general structure and appearance of the face are kept while the fine details are lost. This is a remarkable reduction (more than <code>$10\times$</code>) in the dataset size that can help speed up the learning algorithm significantly. For example, if a neural network was being trained to perform person recognition (given a face image, predict the identitfy of the person), the dimension reduced input of only a 100 dimensions can be used instead of the original pixels.</p>
+
+<pre><code class="language-python">print('Dimension reduction for face dataset...')
+
+K = 100
+Z = projectData(X_norm, U, K)
+
+print('\nThe projected data Z has a size of: ')
+print('{} {}'.format(Z.shape[0], Z.shape[1]))
+
+print('\nVisualizing the projected (reduced dimension) faces.');
+
+X_rec = recoverData(Z, U, K)
+
+# Display normalized data.
+print('\nOriginal faces:')
+displayData(X_norm, 10)
+
+# Display reconstructed data from only k eigenfaces.
+print('\nRecovered faces:')
+displayData(X_rec, 10)
+</code></pre>
+
+<pre><code>Dimension reduction for face dataset...
+
+The projected data Z has a size of: 
+5000 100
+
+Visualizing the projected (reduced dimension) faces.
+
+Original faces:
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/PCA 6.png" alt="Figure 10" title="Figure 10: Original faces." /></p>
+
+<pre><code>Recovered faces:
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/PCA 7.png" alt="Figure 11" title="Figure 11: Recovered faces." /></p>
+
+<h2 id="pca-for-visualization">PCA for Visualization</h2>
+
+<p>In K-means image compression, the K-means algorithm was used in the 3-dimensional RGB space. Next, the following code helps to visualize the final pixel assignments in this 3D space. Each data point is colored according to the cluster it has been assigned to. Mouse can be used on the interactive <code>plotly</code> figure in a <code>Jupyter Notebook</code> to rotate, zoom and inspect this data in 3 dimensions.</p>
+
+<pre><code class="language-python">import plotly
+import plotly.graph_objs as go
+
+plotly.offline.init_notebook_mode(connected=True)
+
+# One useful application of PCA is to use it to visualize high-dimensional
+# data. In the last K-Means exercise K-Means was applied on 3-dimensional 
+# pixel colors of an image. First visualize this output in 3D, and then
+# apply PCA to obtain a visualization in 2D.
+
+# Setup color palette.
+colors = np.array([plt.cm.tab20(float(i) / 10) for i in idx])
+
+# Visualize the data and centroid memberships in 3D.
+trace = go.Scatter3d(x=X_img[:,0], y=X_img[:,1], z=X_img[:,2],
+                      mode='markers',
+                      marker=dict(size=1.5, color=colors, opacity=0.3))
+
+plotly.offline.iplot({'data': [trace],
+                      'layout': {'title': 'Figure 4: Original data in 3D'}})
+</code></pre>
+
+<script>requirejs.config({paths: { 'plotly': ['https://cdn.plot.ly/plotly-latest.min']},});if(!window.Plotly) {{require(['plotly'],function(plotly) {window.Plotly=plotly;});}}</script>
+
+<p><img src="/coursera_ml_andrew/PCA 8.png" alt="Figure 12" title="Figure 12: Original data on 3D." /></p>
+
+<p>It turns out that visualizing datasets in 3 dimensions or greater can be cumbersome. Therefore, it is often desirable to only display the data in 2D even at the cost of losing some information. In practice, PCA is often used to reduce the dimensionality of data for visualization purposes. Next PCA will be applied to the 3-dimensional data to reduce it to 2 dimensions and visualize the result in a 2D scatter plot. The PCA projection can be thought of as a rotation that selects the view that maximizes the spread of the data, which often corresponds to the &ldquo;best&rdquo; view.</p>
+
+<pre><code class="language-python"># Subtract the mean to use PCA.
+X_norm, mu, sigma = featureNormalize(X_img)
+
+# Apply PCA and project the data to 2D.
+U, S = pca(X_norm)
+Z = projectData(X_norm, U, 2)
+
+# Plot in 2D.
+plotDataPoints(Z, idx, K)
+plt.title('Figure 5: 2D visualization produced using PCA')
+plt.show()
+</code></pre>
+
+<p><img src="/coursera_ml_andrew/PCA 9.png" alt="Figure 13" title="Figure 13: 2D visualization produced using PCA." /></p>
 </div>
 
     
